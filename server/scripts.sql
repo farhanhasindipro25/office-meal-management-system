@@ -111,17 +111,35 @@ CREATE TABLE meal_items (
 INSERT INTO meal_items (meal_id, item_id) VALUES ('f3b3a5ef-62b9-4fbb-a2d2-4588fc4d1044', 'ca36081a-b210-4668-872f-6c908ebfef05');
 
 -- Selecting meal items available per day
-SELECT meals.day AS work_day, STRING_AGG(items.name,',') AS item_name
+SELECT meals.id, meals.day AS work_day, STRING_AGG(items.name,',') AS item_name
 FROM meals
 INNER JOIN meal_items ON meals.id = meal_items.meal_id
 INNER JOIN items ON meal_items.item_id = items.id
-GROUP BY meals.day;
+GROUP BY meals.id;
 
 
 CREATE TABLE orders (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     meal_id UUID REFERENCES meals(id),
+    day VARCHAR(255) NOT NULL,
     wants_meal BOOLEAN,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+INSERT INTO orders (wants_meal, meal_id, day) VALUES (TRUE, '','Monday');
+
+-- Selecting orders with meal names
+SELECT
+    orders.id,
+    orders.day,
+    STRING_AGG(items.name,',') AS item_name
+FROM
+    orders
+LEFT JOIN
+    meals ON orders.meal_id = meals.id
+LEFT JOIN
+    meal_items ON meals.id = meal_items.meal_id
+LEFT JOIN
+    items ON meal_items.item_id = items.id
+GROUP BY orders.id;

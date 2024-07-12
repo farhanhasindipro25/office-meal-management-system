@@ -127,12 +127,14 @@ CREATE TABLE orders (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO orders (wants_meal, meal_id, day) VALUES (TRUE, '','Monday');
+INSERT INTO orders (wants_meal, meal_id, day) VALUES (TRUE, 'f3b3a5ef-62b9-4fbb-a2d2-4588fc4d1044','Monday');
+INSERT INTO orders (wants_meal, day) VALUES (TRUE, 'Monday');
 
 -- Selecting orders with meal names
 SELECT
     orders.id,
     orders.day,
+    orders.wants_meal,
     STRING_AGG(items.name,',') AS item_name
 FROM
     orders

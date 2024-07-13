@@ -1,4 +1,4 @@
-CREATE DATABASE officemealmanagement
+CREATE DATABASE office_meal_management
 
 CREATE TABLE roles (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -8,6 +8,7 @@ CREATE TABLE roles (
 );
 
 INSERT INTO roles (name) VALUES ('ADMIN'),('GENERAL_USER');
+
 SELECT * FROM roles;
 
 CREATE TABLE users (
@@ -26,9 +27,9 @@ CREATE TABLE users (
 
 INSERT INTO users (user_name, employee_id, email, phone, gender, password_hashed, role_id, is_banned)
 VALUES 
-('Farhan', 'E12345', 'farhan@example.com', '1234567890', 'Male', 'hashed_password_1', 'aaa887c5-ce72-4097-bae9-537ffde5474e', FALSE),
-('Hasin', 'E12346', 'hasin@example.com', '1234567890', 'Male', 'hashed_password_2', 'aaa887c5-ce72-4097-bae9-537ffde5474e', FALSE),
-('Farhan', 'E12347', 'dipro@example.com', '1234567890', 'Male', 'hashed_password_3', '273c0329-7d15-49ac-86e0-6cf81c45d1f1', FALSE);
+('Farhan', 'E12345', 'farhan@example.com', '1234567890', 'Male', 'hashed_password_1', '9405c271-dff9-4bd9-8824-150a582dc59f', FALSE),
+('Hasin', 'E12346', 'hasin@example.com', '1234567890', 'Male', 'hashed_password_2', '8e36330f-967c-4268-81e9-a86e65eca4e1', FALSE),
+('Dipro', 'E12347', 'dipro@example.com', '1234567890', 'Male', 'hashed_password_3', '8e36330f-967c-4268-81e9-a86e65eca4e1', TRUE);
 
 -- Selecting all users with role names
 SELECT 
@@ -75,7 +76,7 @@ CREATE TABLE items (
 );
 
 
-INSERT INTO items (category_id, name) VALUES ('17219629-3cd2-472a-9089-230718669dd3','Plain Rice'),('17219629-3cd2-472a-9089-230718669dd3','Roti'),('364ce12a-1319-4523-9a80-b5e3672801b1','Begun Bhaji'),('364ce12a-1319-4523-9a80-b5e3672801b1','Daal'),('364ce12a-1319-4523-9a80-b5e3672801b1','Potato Bhorta'),('364ce12a-1319-4523-9a80-b5e3672801b1','Tomato Bhorta'),('76c39085-f377-45c0-88cf-31c196e030b3','Fish Curry'),('76c39085-f377-45c0-88cf-31c196e030b3','Chicken Curry'),('76c39085-f377-45c0-88cf-31c196e030b3','Egg Curry'),('76c39085-f377-45c0-88cf-31c196e030b3','Egg Bhorta');
+INSERT INTO items (category_id, name) VALUES ('932a4a90-4cfe-40f9-a52a-7f32dcae8ba3','Plain Rice'),('932a4a90-4cfe-40f9-a52a-7f32dcae8ba3','Roti'),('497a3890-011e-415d-abf5-597a267d8010','Begun Bhaji'),('497a3890-011e-415d-abf5-597a267d8010','Daal'),('497a3890-011e-415d-abf5-597a267d8010','Potato Bhorta'),('497a3890-011e-415d-abf5-597a267d8010','Tomato Bhorta'),('e0d74414-fb0d-4805-a87d-0d38329565b4','Fish Curry'),('e0d74414-fb0d-4805-a87d-0d38329565b4','Chicken Curry'),('e0d74414-fb0d-4805-a87d-0d38329565b4','Egg Curry'),('e0d74414-fb0d-4805-a87d-0d38329565b4','Egg Bhorta');
 
 -- Selecting all items with category names
 SELECT 
@@ -92,56 +93,74 @@ ON
     items.category_id = categories.id;
 
 
-CREATE TABLE meals (
+CREATE TABLE weekly_schedules (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  day INTEGER,
+  working_day INTEGER,
+  current_month INTEGER,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO meals (day) VALUES (1),(2),(3),(4),(5);
+-- INSERT INTO weekly_schedules (working_day, current_month) VALUES (1, EXTRACT(MONTH FROM CURRENT_DATE)), (2, EXTRACT(MONTH FROM CURRENT_DATE)),(3, EXTRACT(MONTH FROM CURRENT_DATE)),(4, EXTRACT(MONTH FROM CURRENT_DATE)),(5, EXTRACT(MONTH FROM CURRENT_DATE));
 
-
-CREATE TABLE meal_items (
+CREATE TABLE scheduled_meals (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  meal_id UUID NOT NULL REFERENCES meals(id),
+  schedule_id UUID NOT NULL REFERENCES weekly_schedules(id),
   item_id UUID NOT NULL REFERENCES items(id)
 );
 
-INSERT INTO meal_items (meal_id, item_id) VALUES ('f3b3a5ef-62b9-4fbb-a2d2-4588fc4d1044', 'ca36081a-b210-4668-872f-6c908ebfef05');
+INSERT INTO scheduled_meals (schedule_id, item_id) VALUES ('259d803e-a2c4-48e0-a529-3bdd2bf62444', 'f5d2248e-e2c8-4c64-ab5f-254de3947745'),('259d803e-a2c4-48e0-a529-3bdd2bf62444', '348c3a1b-13c9-41cf-8913-2dc1d1f1f7ee'),('259d803e-a2c4-48e0-a529-3bdd2bf62444', '2f692da0-41b7-4422-b8fa-9b9440567c62');
 
--- Selecting meal items available per day
-SELECT meals.id, meals.day AS work_day, STRING_AGG(items.name,',') AS item_name
-FROM meals
-INNER JOIN meal_items ON meals.id = meal_items.meal_id
-INNER JOIN items ON meal_items.item_id = items.id
-GROUP BY meals.id;
+-- Selecting scheduled meal items available per day
+SELECT weekly_schedules.id, weekly_schedules.working_day, STRING_AGG(items.name,',') AS item_name
+FROM weekly_schedules
+INNER JOIN scheduled_meals ON weekly_schedules.id = scheduled_meals.schedule_id
+INNER JOIN items ON scheduled_meals.item_id = items.id
+GROUP BY weekly_schedules.id;
 
 
 CREATE TABLE orders (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    meal_id UUID REFERENCES meals(id),
-    day VARCHAR(255) NOT NULL,
+    meal_id UUID REFERENCES weekly_schedules(id),
+    user_id UUID REFERENCES users(id),
+    date VARCHAR(255) NOT NULL,
+    month INTEGER,
     wants_meal BOOLEAN,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO orders (wants_meal, meal_id, day) VALUES (TRUE, 'f3b3a5ef-62b9-4fbb-a2d2-4588fc4d1044','Monday');
-INSERT INTO orders (wants_meal, day) VALUES (TRUE, 'Monday');
+-- INSERT INTO orders (user_id, wants_meal, meal_id, date, month) VALUES ('8f92dd1b-eb26-4432-8b20-3f4c14813d89',TRUE, '259d803e-a2c4-48e0-a529-3bdd2bf62444','Sunday',EXTRACT(MONTH FROM CURRENT_DATE));
+-- INSERT INTO orders (user_id, wants_meal, date, month) VALUES ('8f92dd1b-eb26-4432-8b20-3f4c14813d89',FALSE, 'Monday',EXTRACT(MONTH FROM CURRENT_DATE));
 
 -- Selecting orders with meal names
 SELECT
-    orders.id,
-    orders.day,
+    users.id AS user_id,
+    users.user_name,
+    roles.name AS role_name,
+    orders.id AS order_id,
+    orders.date,
     orders.wants_meal,
-    STRING_AGG(items.name,',') AS item_name
+    STRING_AGG(items.name, ', ') AS item_names
 FROM
     orders
+INNER JOIN
+    users ON orders.user_id = users.id
+INNER JOIN
+    roles ON users.role_id = roles.id
 LEFT JOIN
-    meals ON orders.meal_id = meals.id
+    weekly_schedules ON orders.meal_id = weekly_schedules.id
 LEFT JOIN
-    meal_items ON meals.id = meal_items.meal_id
+    scheduled_meals ON weekly_schedules.id = scheduled_meals.schedule_id
 LEFT JOIN
-    items ON meal_items.item_id = items.id
-GROUP BY orders.id;
+    items ON scheduled_meals.item_id = items.id
+GROUP BY
+    users.id,
+    users.user_name,
+    roles.name,
+    orders.id,
+    orders.date,
+    orders.wants_meal
+ORDER BY
+    users.user_name,
+    orders.date;

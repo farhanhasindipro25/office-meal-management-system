@@ -1,9 +1,10 @@
-const Pool = require("pg").Pool;
+import pkg from "pg";
+const { Pool } = pkg;
 
 const pool = new Pool({
   user: "postgres",
   host: "localhost",
-  database: "office-meal-management-system",
+  database: "office_meal_management",
   password: "test",
   port: 5432,
 });

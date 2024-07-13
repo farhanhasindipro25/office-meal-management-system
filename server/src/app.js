@@ -11,6 +11,12 @@ app.use(express.json());
 
 app.use("/api/v1", APP_ROUTES);
 
+app.get("/", (req, res) => {
+  res.send("Server is running successfully!");
+});
+
 app.listen(config.port, () =>
   console.log(`App listening to port ${config.port}`)
 );
+
+export default app;

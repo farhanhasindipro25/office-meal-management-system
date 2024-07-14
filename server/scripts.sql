@@ -18,18 +18,17 @@ CREATE TABLE users (
     email VARCHAR(255) UNIQUE NOT NULL,
     phone VARCHAR(20),
     gender VARCHAR(10),
-    password_hashed VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
     role_id UUID NOT NULL REFERENCES roles(id),
     is_banned BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO users (user_name, employee_id, email, phone, gender, password_hashed, role_id, is_banned)
-VALUES 
-('Farhan', 'E12345', 'farhan@example.com', '1234567890', 'Male', 'hashed_password_1', '9405c271-dff9-4bd9-8824-150a582dc59f', FALSE),
-('Hasin', 'E12346', 'hasin@example.com', '1234567890', 'Male', 'hashed_password_2', '8e36330f-967c-4268-81e9-a86e65eca4e1', FALSE),
-('Dipro', 'E12347', 'dipro@example.com', '1234567890', 'Male', 'hashed_password_3', '8e36330f-967c-4268-81e9-a86e65eca4e1', TRUE);
+INSERT INTO users (user_name, employee_id, email, phone, gender, password, role_id, is_banned)
+VALUES ('Farhan', 'E12345', 'farhan@example.com', '1234567890', 'Male', 'password_1', '9405c271-dff9-4bd9-8824-150a582dc59f', FALSE),
+('Hasin', 'E12346', 'hasin@example.com', '1234567890', 'Male', 'password_2', '8e36330f-967c-4268-81e9-a86e65eca4e1', FALSE),
+('Dipro', 'E12347', 'dipro@example.com', '1234567890', 'Male', 'password_3', '8e36330f-967c-4268-81e9-a86e65eca4e1', TRUE);
 
 -- Selecting all users with role names
 SELECT 

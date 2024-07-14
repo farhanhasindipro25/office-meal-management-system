@@ -1,10 +1,11 @@
 import pool from "../../../db.js";
 
-const POST_ROLE_TO_DB = `INSERT INTO roles (name) VALUES ($1)`;
+const POST_ROLE_TO_DB = "INSERT INTO roles (name) VALUES ($1)";
 const GET_ROLES_FROM_DB = "SELECT * FROM roles";
 
 const ADD_ROLE_TO_DB = async (name) => {
-  await pool.query(POST_ROLE_TO_DB, [name]);
+  const response = await pool.query(POST_ROLE_TO_DB, [name]);
+  return response;
 };
 
 const READ_ROLES_FROM_DB = async () => {

@@ -44,6 +44,46 @@ const loginUser = async (req, res) => {
   }
 };
 
+const refreshToken = async (req, res) => {
+  const { refresh_token } = req.cookies;
+  if (!refresh_token) {
+    return res.status(401).json({
+      status: 401,
+      message: "Refresh token not found",
+    });
+  }
+
+  try {
+    const { valid, decoded, error } = await AuthServices.VERIFY_REFRESH_TOKEN(
+      refresh_token
+    );
+    if (!valid) {
+      return res.status(401).json({
+        status: 401,
+        message: "Invalid refresh token",
+        error: error,
+      });
+    }
+
+    const newAccessToken = jwtHelper(decoded).accessToken;
+    return res.status(201).json({
+      status: 201,
+      message: "New access token generated",
+      data: {
+        accessToken: newAccessToken,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      status: 500,
+      message: "Internal Server Error",
+      error: error,
+    });
+  }
+};
+
 export const AuthController = {
   loginUser,
+  refreshToken,
 };

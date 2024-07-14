@@ -6,6 +6,10 @@ function jwtHelper(user) {
     id: user.id,
     email: user.email,
     role_id: user.role_id,
+    role_name: user.role_name,
+    phone: user.phone,
+    gender: user.gender,
+    employee_id: user.employee_id,
     is_banned: user.is_banned,
   };
   const accessToken = jwt.sign(payload, config.access_token_secret, {

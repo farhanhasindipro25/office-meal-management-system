@@ -1,5 +1,8 @@
-const POST_USER_TO_DB =
-  "INSERT INTO users (user_name, employee_id, email, phone, gender, password, role_id) VALUES ($1, $2, $3, $4, $5, $6, $7)";
+const POST_USER_TO_DB = `
+  INSERT INTO users (user_name, employee_id, email, phone, gender, password, role_id)
+  VALUES ($1, $2, $3, $4, $5, $6, $7)
+  RETURNING id, user_name, employee_id, email, phone, gender, role_id, is_banned, created_at, updated_at
+`;
 
 const GET_USERS_FROM_DB = `
 SELECT 

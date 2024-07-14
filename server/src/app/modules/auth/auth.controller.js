@@ -6,10 +6,16 @@ const loginUser = async (req, res) => {
   const { email, password } = req.body;
   try {
     const result = await AuthServices.LOGIN_USER(email);
+    if (!email || !password) {
+      res.status(400).json({
+        status: 400,
+        message: "Email and password are required!",
+      });
+    }
     if (result.rows.length === 0) {
       res.status(401).json({
         status: 401,
-        message: "An account with this email does not exist",
+        message: "Unauthorized: An account with this email does not exist.",
       });
     }
 
@@ -21,7 +27,7 @@ const loginUser = async (req, res) => {
     if (!validPassword)
       res.status(401).json({
         status: 401,
-        message: "Incorrect Password",
+        message: "Unauthorized: Incorrect Password.",
       });
 
     let tokens = jwtHelper(result.rows[0]);
@@ -49,7 +55,7 @@ const refreshToken = async (req, res) => {
   if (!refresh_token) {
     return res.status(401).json({
       status: 401,
-      message: "Refresh token not found",
+      message: "Unauthorized: Refresh Token Not Found.",
     });
   }
 
@@ -60,7 +66,7 @@ const refreshToken = async (req, res) => {
     if (!valid) {
       return res.status(401).json({
         status: 401,
-        message: "Invalid refresh token",
+        message: "Unauthorized: Invalid Refresh Token.",
         error: error,
       });
     }

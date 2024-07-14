@@ -52,8 +52,12 @@ const UPDATE_USER_IN_DB = async (
   return response;
 };
 
+const BAN_USER_IN_DB = async (is_banned, id) => {
+  await pool.query(BAN_USER_IN_DB, [is_banned, id]);
+};
 export const UsersServices = {
   ADD_USER_TO_DB,
   READ_USERS_FROM_DB,
   UPDATE_USER_IN_DB,
+  BAN_USER_IN_DB,
 };

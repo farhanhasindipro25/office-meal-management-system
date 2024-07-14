@@ -86,8 +86,31 @@ const editUser = async (req, res) => {
   }
 };
 
+const banUser = async (req, res) => {
+  const userID = req.params.id;
+  const { is_banned } = req.body;
+  try {
+    await UsersServices.BAN_USER_IN_DB(is_banned, userID);
+    res.status(201).json({
+      status: 201,
+      message: "User has been banned.",
+      data: {
+        banned_user: userID,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 500,
+      message: "Internal Server Error",
+      error: error,
+    });
+  }
+};
+
 export const UsersController = {
   addUser,
   getUsers,
   editUser,
+  banUser,
 };

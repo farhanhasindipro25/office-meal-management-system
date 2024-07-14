@@ -33,3 +33,10 @@ UPDATE users SET
     updated_at = NOW()
 WHERE id = $7 RETURNING *
 `;
+
+export const BAN_USER_IN_DB = `
+UPDATE users SET
+    is_banned = $1,
+    updated_at = NOW() 
+WHERE id = $2 RETURNING *
+`;

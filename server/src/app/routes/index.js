@@ -4,6 +4,7 @@ import { UsersRoutes } from "../modules/users/users.routes.js";
 import { CategoriesRoutes } from "../modules/categories/categories.routes.js";
 import { ItemRoutes } from "../modules/items/items.routes.js";
 import { SchedulesRoutes } from "../modules/weekly-schedules/weekly-schedules.routes.js";
+import { ScheduledMealsRoutes } from "../modules/scheduled-meals/scheduled-meals.routes.js";
 
 const APP_ROUTES = Router();
 
@@ -32,10 +33,10 @@ const moduleRoutes = [
     path: "/schedules",
     route: SchedulesRoutes,
   },
-  //   {
-  //     path: "/scheduled-meals",
-  //     route: "",
-  //   },
+  {
+    path: "/meals",
+    route: ScheduledMealsRoutes,
+  },
   //   {
   //     path: "/orders",
   //     route: "",

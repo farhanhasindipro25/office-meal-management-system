@@ -27,7 +27,7 @@ const getRoles = async (req, res) => {
       status: 200,
       message: "Roles data retrieved.",
       data: {
-        role: result.rows,
+        roles: result.rows,
       },
     });
   } catch (error) {

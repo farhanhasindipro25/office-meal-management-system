@@ -29,7 +29,7 @@ const getSchedules = async (req, res) => {
       status: 200,
       message: "Schedules data retrieved.",
       data: {
-        schedule: result.rows,
+        schedules: result.rows,
       },
     });
   } catch (error) {

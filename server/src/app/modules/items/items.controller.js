@@ -31,7 +31,7 @@ const getItems = async (req, res) => {
       status: 200,
       message: "Items data retrieved.",
       data: {
-        users: result.rows,
+        items: result.rows,
       },
     });
   } catch (error) {

@@ -26,7 +26,14 @@ const loginUser = async (req, res) => {
 
     let tokens = jwtHelper(result.rows[0]);
     res.cookie("refresh_token", tokens.refreshToken, { httpOnly: true });
-    res.status(201).json(tokens);
+    res.status(201).json({
+      status: 201,
+      message: "Login successful",
+      data: {
+        tokens: tokens,
+        user: result.rows[0],
+      },
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({

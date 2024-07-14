@@ -38,7 +38,7 @@ SELECT
     users.email,
     users.phone,
     users.gender,
-    users.password_hashed,
+    users.password,
     roles.name AS role_name,
     users.is_banned,
     users.created_at,

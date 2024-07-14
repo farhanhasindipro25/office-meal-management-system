@@ -1,7 +1,5 @@
 import pool from "../../../db.js";
-
-const POST_USER_TO_DB =
-  "INSERT INTO users (user_name, employee_id, email, phone, gender, password, role_id) VALUES ($1, $2, $3, $4, $5, $6, $7)";
+import { GET_USERS_FROM_DB, POST_USER_TO_DB } from "./users.repository.js";
 
 const ADD_USER_TO_DB = async (
   user_name,
@@ -21,10 +19,15 @@ const ADD_USER_TO_DB = async (
     password,
     role_id,
   ]);
-  console.log(response);
+  return response;
+};
+
+const READ_USERS_FROM_DB = async () => {
+  const response = await pool.query(GET_USERS_FROM_DB);
   return response;
 };
 
 export const UsersServices = {
   ADD_USER_TO_DB,
+  READ_USERS_FROM_DB,
 };

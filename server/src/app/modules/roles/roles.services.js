@@ -1,7 +1,5 @@
 import pool from "../../../db.js";
-
-const POST_ROLE_TO_DB = "INSERT INTO roles (name) VALUES ($1)";
-const GET_ROLES_FROM_DB = "SELECT * FROM roles";
+import { GET_ROLES_FROM_DB, POST_ROLE_TO_DB } from "./roles.repository.js";
 
 const ADD_ROLE_TO_DB = async (name) => {
   const response = await pool.query(POST_ROLE_TO_DB, [name]);

@@ -38,6 +38,26 @@ const addUser = async (req, res) => {
   }
 };
 
+const getUsers = async (req, res) => {
+  try {
+    const result = await UsersServices.READ_USERS_FROM_DB();
+    res.status(200).json({
+      status: 200,
+      message: "Users data retrieved successfully.",
+      data: {
+        users: result.rows,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 500,
+      message: "Internal Server Error",
+      error: error,
+    });
+  }
+};
+
 export const UsersController = {
   addUser,
+  getUsers,
 };

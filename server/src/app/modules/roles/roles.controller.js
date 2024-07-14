@@ -31,7 +31,6 @@ const getRoles = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       status: 500,
       message: "Internal Server Error",

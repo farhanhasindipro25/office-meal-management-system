@@ -6,7 +6,7 @@ const addRole = async (req, res) => {
     await RolesServices.ADD_ROLE_TO_DB(name);
     res.status(201).json({
       status: 201,
-      message: "Successfully added user role",
+      message: "Added user role",
       data: {
         role: name,
       },
@@ -25,7 +25,7 @@ const getRoles = async (req, res) => {
     const result = await RolesServices.READ_ROLES_FROM_DB();
     res.status(200).json({
       status: 200,
-      message: "Roles data retrieved successfully.",
+      message: "Roles data retrieved.",
       data: {
         role: result.rows,
       },

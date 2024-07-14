@@ -21,3 +21,15 @@ INNER JOIN
 ON 
     users.role_id = roles.id;
 `;
+
+export const PATCH_USER_IN_DB = `
+UPDATE users SET
+    user_name = $1,
+    employee_id = $2,
+    email = $3,
+    phone = $4,
+    gender = $5,
+    role_id = $6,
+    updated_at = NOW()
+WHERE id = $7 RETURNING *
+`;

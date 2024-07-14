@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { RolesRoutes } from "../modules/roles/roles.routes.js";
 import { UsersRoutes } from "../modules/users/users.routes.js";
+import { CategoriesRoutes } from "../modules/categories/categories.routes.js";
 
 const APP_ROUTES = Router();
 
@@ -17,10 +18,10 @@ const moduleRoutes = [
   //     path: "/auth",
   //     route: "",
   //   },
-  //   {
-  //     path: "/categories",
-  //     route: "",
-  //   },
+  {
+    path: "/categories",
+    route: CategoriesRoutes,
+  },
   //   {
   //     path: "/items",
   //     route: "",

@@ -24,6 +24,26 @@ const addItem = async (req, res) => {
   }
 };
 
+const getItems = async (req, res) => {
+  try {
+    const result = await ItemsServices.READ_ITEMS_FROM_DB();
+    res.status(200).json({
+      status: 200,
+      message: "Items data retrieved.",
+      data: {
+        users: result.rows,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 500,
+      message: "Internal Server Error",
+      error: error,
+    });
+  }
+};
+
 export const ItemsController = {
   addItem,
+  getItems,
 };

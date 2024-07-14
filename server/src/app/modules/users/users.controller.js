@@ -57,6 +57,28 @@ const getUsers = async (req, res) => {
   }
 };
 
+const getUserById = async (req, res) => {
+  const userID = req.params.id;
+  try {
+    const result = await UsersServices.READ_USER_BY_ID_FROM_DB(userID);
+
+    res.status(200).json({
+      status: 200,
+      message: "User data retrieved.",
+      data: {
+        user: result.rows[0],
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 500,
+      message: "Internal Server Error",
+      error: error,
+    });
+  }
+};
+
 const editUser = async (req, res) => {
   const userID = req.params.id;
   const { user_name, employee_id, email, phone, gender, role_id } = req.body;
@@ -91,9 +113,18 @@ const banUser = async (req, res) => {
   const { is_banned } = req.body;
   try {
     await UsersServices.BAN_USER_IN_DB(is_banned, userID);
+    if (is_banned === true) {
+      res.status(201).json({
+        status: 201,
+        message: "User has been banned.",
+        data: {
+          banned_user: userID,
+        },
+      });
+    }
     res.status(201).json({
       status: 201,
-      message: "User has been banned.",
+      message: "User's ban has been lifted.",
       data: {
         banned_user: userID,
       },
@@ -111,6 +142,7 @@ const banUser = async (req, res) => {
 export const UsersController = {
   addUser,
   getUsers,
+  getUserById,
   editUser,
   banUser,
 };

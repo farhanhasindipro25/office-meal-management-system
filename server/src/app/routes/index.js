@@ -3,6 +3,7 @@ import { RolesRoutes } from "../modules/roles/roles.routes.js";
 import { UsersRoutes } from "../modules/users/users.routes.js";
 import { CategoriesRoutes } from "../modules/categories/categories.routes.js";
 import { ItemRoutes } from "../modules/items/items.routes.js";
+import { SchedulesRoutes } from "../modules/weekly-schedules/weekly-schedules.routes.js";
 
 const APP_ROUTES = Router();
 
@@ -27,10 +28,10 @@ const moduleRoutes = [
     path: "/items",
     route: ItemRoutes,
   },
-  //   {
-  //     path: "/weekly-schedules",
-  //     route: "",
-  //   },
+  {
+    path: "/schedules",
+    route: SchedulesRoutes,
+  },
   //   {
   //     path: "/scheduled-meals",
   //     route: "",

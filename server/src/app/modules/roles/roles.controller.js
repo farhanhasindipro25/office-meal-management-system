@@ -20,6 +20,27 @@ const addRole = async (req, res) => {
   }
 };
 
+const getRoles = async (req, res) => {
+  try {
+    const result = await RolesServices.READ_ROLES_FROM_DB();
+    res.status(200).json({
+      status: 200,
+      message: "Roles data retrieved successfully.",
+      data: {
+        role: result.rows,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 500,
+      message: "Internal Server Error",
+      error: error,
+    });
+  }
+};
+
 export const RolesController = {
   addRole,
+  getRoles,
 };

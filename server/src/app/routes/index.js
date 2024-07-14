@@ -5,6 +5,7 @@ import { CategoriesRoutes } from "../modules/categories/categories.routes.js";
 import { ItemRoutes } from "../modules/items/items.routes.js";
 import { SchedulesRoutes } from "../modules/weekly-schedules/weekly-schedules.routes.js";
 import { ScheduledMealsRoutes } from "../modules/scheduled-meals/scheduled-meals.routes.js";
+import { OrdersRoutes } from "../modules/orders/orders.routes.js";
 
 const APP_ROUTES = Router();
 
@@ -37,10 +38,10 @@ const moduleRoutes = [
     path: "/meals",
     route: ScheduledMealsRoutes,
   },
-  //   {
-  //     path: "/orders",
-  //     route: "",
-  //   },
+  {
+    path: "/orders",
+    route: OrdersRoutes,
+  },
 ];
 
 moduleRoutes.forEach((route) => APP_ROUTES.use(route.path, route.route));

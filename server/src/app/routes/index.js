@@ -2,6 +2,7 @@ import { Router } from "express";
 import { RolesRoutes } from "../modules/roles/roles.routes.js";
 import { UsersRoutes } from "../modules/users/users.routes.js";
 import { CategoriesRoutes } from "../modules/categories/categories.routes.js";
+import { ItemRoutes } from "../modules/items/items.routes.js";
 
 const APP_ROUTES = Router();
 
@@ -22,10 +23,10 @@ const moduleRoutes = [
     path: "/categories",
     route: CategoriesRoutes,
   },
-  //   {
-  //     path: "/items",
-  //     route: "",
-  //   },
+  {
+    path: "/items",
+    route: ItemRoutes,
+  },
   //   {
   //     path: "/weekly-schedules",
   //     route: "",

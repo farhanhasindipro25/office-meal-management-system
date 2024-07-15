@@ -1,33 +1,33 @@
 const POST_ORDER_TO_DB =
-  "INSERT INTO orders (user_id,wants_meal, meal_id, date, month) VALUES ($1,$2,$3,$4,EXTRACT(MONTH FROM CURRENT_DATE));";
+  "INSERT INTO orders (user_id,wants_meal, meal_id, date, month) VALUES ($1,$2,$3,$4,EXTRACT(MONTH FROM CURRENT_DATE))";
 
 const GET_USER_ORDERS_FROM_DB = `
   SELECT
-      orders.id AS order_id,
-      orders.user_id,
-      orders.wants_meal,
-      orders.meal_id,
-      orders.date,
-      STRING_AGG(items.name, ', ') AS item_names
-  FROM
-      orders
-  LEFT JOIN
-      weekly_schedules ON orders.meal_id = weekly_schedules.id
-  LEFT JOIN
-      scheduled_meals ON weekly_schedules.id = scheduled_meals.schedule_id
-  LEFT JOIN
-      items ON scheduled_meals.item_id = items.id
-  WHERE
-      orders.user_id = $1
-  GROUP BY
-      orders.id,
-      orders.user_id,
-      orders.wants_meal,
-      orders.meal_id,
-      orders.date
-  ORDER BY
-      orders.date;
-  `;
+    orders.id AS order_id,
+    orders.user_id,
+    orders.wants_meal,
+    orders.meal_id,
+    orders.date,
+    STRING_AGG(items.name, ', ') AS item_names
+FROM
+    orders
+LEFT JOIN
+    weekly_schedules ON orders.meal_id = weekly_schedules.id
+LEFT JOIN
+    scheduled_meals ON weekly_schedules.id = scheduled_meals.schedule_id
+LEFT JOIN
+    items ON scheduled_meals.item_id = items.id
+WHERE
+    orders.user_id = $1
+GROUP BY
+    orders.id,
+    orders.user_id,
+    orders.wants_meal,
+    orders.meal_id,
+    orders.date
+ORDER BY
+    orders.date
+`;
 
 const GET_ALL_ORDERS_FROM_DB = `
 SELECT

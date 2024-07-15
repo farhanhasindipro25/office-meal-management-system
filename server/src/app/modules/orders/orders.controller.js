@@ -52,7 +52,7 @@ const getUserOrders = async (req, res) => {
       status: 200,
       message: "Orders data retrieved.",
       data: {
-        orders: result.rows[0],
+        orders: result.rows,
       },
     });
   } catch (error) {

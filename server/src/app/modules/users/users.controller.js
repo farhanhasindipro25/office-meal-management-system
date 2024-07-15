@@ -5,6 +5,15 @@ const addUser = async (req, res) => {
   const { user_name, employee_id, email, phone, gender, password, role_id } =
     req.body;
   try {
+    const emailAlreadyExists = await UsersServices.CHECK_EMAIL_EXISTS_IN_DB(
+      email
+    );
+    if (emailAlreadyExists.rows.length > 0) {
+      return res.status(400).json({
+        status: 400,
+        message: "An account with this email already exists",
+      });
+    }
     const password_hashed = await bcrypt.hash(password, 10);
     await UsersServices.ADD_USER_TO_DB(
       user_name,

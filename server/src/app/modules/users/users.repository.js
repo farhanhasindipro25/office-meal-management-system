@@ -67,10 +67,13 @@ UPDATE users SET
 WHERE id = $2 RETURNING *
 `;
 
+const CHECK_EMAIL_EXISTS = "SELECT * FROM users WHERE email=($1)";
+
 export const UsersRepository = {
   POST_USER_TO_DB,
   GET_USERS_FROM_DB,
   GET_USER_BY_ID_FROM_DB,
   PATCH_USER_IN_DB,
   BAN_USER_IN_DB,
+  CHECK_EMAIL_EXISTS,
 };

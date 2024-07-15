@@ -58,10 +58,19 @@ const UPDATE_USER_IN_DB = async (
 const BAN_USER_IN_DB = async (is_banned, id) => {
   await pool.query(UsersRepository.BAN_USER_IN_DB, [is_banned, id]);
 };
+
+const CHECK_EMAIL_EXISTS_IN_DB = async (email) => {
+  const response = await pool.query(UsersRepository.CHECK_EMAIL_EXISTS, [
+    email,
+  ]);
+  return response;
+};
+
 export const UsersServices = {
   ADD_USER_TO_DB,
   READ_USERS_FROM_DB,
   READ_USER_BY_ID_FROM_DB,
   UPDATE_USER_IN_DB,
   BAN_USER_IN_DB,
+  CHECK_EMAIL_EXISTS_IN_DB,
 };

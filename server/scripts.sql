@@ -132,7 +132,7 @@ CREATE TABLE orders (
 -- INSERT INTO orders (user_id, wants_meal, meal_id, date, month) VALUES ('8f92dd1b-eb26-4432-8b20-3f4c14813d89',TRUE, '259d803e-a2c4-48e0-a529-3bdd2bf62444','Sunday',EXTRACT(MONTH FROM CURRENT_DATE));
 -- INSERT INTO orders (user_id, wants_meal, date, month) VALUES ('8f92dd1b-eb26-4432-8b20-3f4c14813d89',FALSE, 'Monday',EXTRACT(MONTH FROM CURRENT_DATE));
 
--- Selecting orders with meal names
+-- Selecting all orders with meal names
 SELECT
     users.id AS user_id,
     users.user_name,
@@ -162,4 +162,25 @@ GROUP BY
     orders.wants_meal
 ORDER BY
     users.user_name,
+    orders.date;
+
+-- Selecting user orders with meal names
+SELECT
+    orders.id AS order_id,
+    orders.date,
+    orders.wants_meal,
+    STRING_AGG(items.name, ', ') AS item_names
+FROM
+    orders
+LEFT JOIN
+    weekly_schedules ON orders.meal_id = weekly_schedules.id
+LEFT JOIN
+    scheduled_meals ON weekly_schedules.id = scheduled_meals.schedule_id
+LEFT JOIN
+    items ON scheduled_meals.item_id = items.id
+GROUP BY
+    orders.id,
+    orders.date,
+    orders.wants_meal
+ORDER BY
     orders.date;

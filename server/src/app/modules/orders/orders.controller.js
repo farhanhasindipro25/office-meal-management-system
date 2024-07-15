@@ -24,4 +24,42 @@ const addOrder = async (req, res) => {
   }
 };
 
-export const OrdersController = { addOrder };
+const getAllOrders = async (req, res) => {
+  try {
+    const result = await OrdersServices.READ_ALL_ORDERS_FROM_DB();
+    res.status(200).json({
+      status: 200,
+      message: "Orders data retrieved.",
+      data: {
+        orders: result.rows,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 500,
+      message: "Internal Server Error",
+      error: error,
+    });
+  }
+};
+
+const getUserOrders = async (req, res) => {
+  try {
+    const result = await OrdersServices.READ_USER_ORDERS_FROM_DB();
+    res.status(200).json({
+      status: 200,
+      message: "Orders data retrieved.",
+      data: {
+        orders: result.rows,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 500,
+      message: "Internal Server Error",
+      error: error,
+    });
+  }
+};
+
+export const OrdersController = { addOrder, getAllOrders, getUserOrders };

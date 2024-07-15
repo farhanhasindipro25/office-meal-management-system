@@ -7,26 +7,31 @@ const router = Router();
 router.post(
   "/create-user",
   AuthenticateUser,
-  AuthorizeUser("ADMIN", "GENERAL_USER"),
+  AuthorizeUser("ADMIN"),
   UsersController.addUser
 );
 router.get(
   "/",
   AuthenticateUser,
-  AuthorizeUser("ADMIN", "GENERAL_USER"),
+  AuthorizeUser("ADMIN"),
   UsersController.getUsers
 );
-router.get("/:id", AuthenticateUser, UsersController.getUserById);
+router.get(
+  "/:id",
+  AuthenticateUser,
+  AuthorizeUser("GENERAL_USER"),
+  UsersController.getUserById
+);
 router.patch(
   "/:id/edit",
   AuthenticateUser,
-  AuthorizeUser("ADMIN", "GENERAL_USER"),
+  AuthorizeUser("ADMIN"),
   UsersController.editUser
 );
 router.patch(
   "/:id/ban",
   AuthenticateUser,
-  AuthorizeUser("ADMIN", "GENERAL_USER"),
+  AuthorizeUser("ADMIN"),
   UsersController.banUser
 );
 

@@ -10,6 +10,18 @@ const ADD_ORDER_TO_DB = async (wants_meal, meal_id, date) => {
   return response;
 };
 
+const READ_ALL_ORDERS_FROM_DB = async () => {
+  const response = await pool.query(OrdersRepository.GET_ALL_ORDERS_FROM_DB);
+  return response;
+};
+
+const READ_USER_ORDERS_FROM_DB = async () => {
+  const response = await pool.query(OrdersRepository.GET_USER_ORDERS_FROM_DB);
+  return response;
+};
+
 export const OrdersServices = {
   ADD_ORDER_TO_DB,
+  READ_ALL_ORDERS_FROM_DB,
+  READ_USER_ORDERS_FROM_DB,
 };

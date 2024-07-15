@@ -7,7 +7,7 @@ const router = Router();
 router.post(
   "/create-scheduled-meal",
   AuthenticateUser,
-  AuthorizeUser("ADMIN", "GENERAL_USER"),
+  AuthorizeUser("ADMIN"),
   ScheduledMealsController.addScheduledMeal
 );
 router.get("/", AuthenticateUser, ScheduledMealsController.getScheduledMeals);

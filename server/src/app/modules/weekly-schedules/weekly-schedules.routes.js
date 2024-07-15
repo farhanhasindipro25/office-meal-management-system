@@ -7,13 +7,13 @@ const router = Router();
 router.post(
   "/create-schedule",
   AuthenticateUser,
-  AuthorizeUser("ADMIN", "GENERAL_USER"),
+  AuthorizeUser("ADMIN"),
   SchedulesController.addSchedule
 );
 router.get(
   "/",
   AuthenticateUser,
-  AuthorizeUser("ADMIN", "GENERAL_USER"),
+  AuthorizeUser("ADMIN"),
   SchedulesController.getSchedules
 );
 

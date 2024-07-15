@@ -7,13 +7,13 @@ const router = Router();
 router.post(
   "/create-role",
   AuthenticateUser,
-  AuthorizeUser("ADMIN", "GENERAL_USER"),
+  AuthorizeUser("ADMIN"),
   RolesController.addRole
 );
 router.get(
   "/",
   AuthenticateUser,
-  AuthorizeUser("ADMIN", "GENERAL_USER"),
+  AuthorizeUser("ADMIN"),
   RolesController.getRoles
 );
 

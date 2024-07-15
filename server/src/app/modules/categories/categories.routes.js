@@ -7,13 +7,13 @@ const router = Router();
 router.post(
   "/create-category",
   AuthenticateUser,
-  AuthorizeUser("ADMIN", "GENERAL_USER"),
+  AuthorizeUser("ADMIN"),
   CategoriesController.addCategory
 );
 router.get(
   "/",
   AuthenticateUser,
-  AuthorizeUser("ADMIN", "GENERAL_USER"),
+  AuthorizeUser("ADMIN"),
   CategoriesController.getCategories
 );
 

@@ -1,26 +1,18 @@
-import jwt from "jsonwebtoken";
-import config from "../config/index.js";
-
 const AuthorizeUser = (roles = []) => {
   if (typeof roles === "string") {
     roles = [roles];
   }
 
   return (req, res, next) => {
-    const token =
-      req.headers.authorization && req.headers.authorization.split(" ")[1];
-    if (!token) {
+    if (!req.user) {
       return res.status(401).json({
         status: 401,
-        message: "Unauthorized: Invalid Access Token.",
+        message: "Unauthorized: User information not found.",
       });
     }
 
     try {
-      const decoded = jwt.verify(token, config.access_token_secret);
-      req.user = decoded;
-
-      if (roles.length && !roles.includes(decoded.role_name)) {
+      if (roles.length && !roles.includes(req.user.role_name)) {
         return res.status(403).json({
           status: 403,
           message:

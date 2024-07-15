@@ -5,7 +5,7 @@ import AuthorizeUser from "../../middlewares/AuthorizeUser.js";
 
 const router = Router();
 router.post(
-  "/create-order",
+  "/:id/create-order",
   AuthenticateUser,
   AuthorizeUser("GENERAL_USER"),
   OrdersController.addOrder
@@ -17,7 +17,7 @@ router.get(
   OrdersController.getAllOrders
 );
 router.get(
-  "/",
+  "/:id",
   AuthenticateUser,
   AuthorizeUser("GENERAL_USER"),
   OrdersController.getUserOrders

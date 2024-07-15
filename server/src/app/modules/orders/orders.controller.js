@@ -1,9 +1,10 @@
 import { OrdersServices } from "./orders.services.js";
 
 const addOrder = async (req, res) => {
+  const userID = req.params.id;
   const { wants_meal, meal_id, date } = req.body;
   try {
-    await OrdersServices.ADD_ORDER_TO_DB(wants_meal, meal_id, date);
+    await OrdersServices.ADD_ORDER_TO_DB(userID, wants_meal, meal_id, date);
     res.status(201).json({
       status: 201,
       message: "Added new order",
@@ -44,13 +45,14 @@ const getAllOrders = async (req, res) => {
 };
 
 const getUserOrders = async (req, res) => {
+  const userID = req.params.id;
   try {
-    const result = await OrdersServices.READ_USER_ORDERS_FROM_DB();
+    const result = await OrdersServices.READ_USER_ORDERS_FROM_DB(userID);
     res.status(200).json({
       status: 200,
       message: "Orders data retrieved.",
       data: {
-        orders: result.rows,
+        orders: result.rows[0],
       },
     });
   } catch (error) {

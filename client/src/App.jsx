@@ -1,10 +1,10 @@
-import "./App.css";
-
 function App() {
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-    </>
+    <div className="min-h-screen">
+      <div>
+        <h2 className="font-medium">LOGIN</h2>
+      </div>
+    </div>
   );
 }
 

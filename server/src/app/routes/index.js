@@ -45,6 +45,6 @@ const moduleRoutes = [
   },
 ];
 
-moduleRoutes.forEach((route) => APP_ROUTES.use(route.path, route.route));
+moduleRoutes.forEach((route) => apiRoutes.use(route.path, route.route));
 
 export default apiRoutes;

@@ -7,8 +7,8 @@ import {
   DEFAULT_ICON_STYLES,
   DEFAULT_TAB_STYLES,
   DEFAULT_TEXT_STYLES,
-} from "../../styles/pages/LeftSideNavigationStyles";
-import { adminLeftSideNavigationOptions } from "../../statics/AdminLeftSideNavigationOptions";
+} from "../../../styles/pages/LeftSideNavigationStyles";
+import { adminLeftSideNavigationOptions } from "../../../statics/AdminLeftSideNavigationOptions";
 
 export default function AdminLeftSideNavigations() {
   const { pathname } = useLocation();

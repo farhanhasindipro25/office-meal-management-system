@@ -4,8 +4,13 @@ import express from "express";
 import config from "./app/config/index.js";
 import apiRoutes from "./app/routes/index.js";
 
+const corsOptions = {
+  origin: "http://localhost:5173",
+  credentials: true,
+};
+
 const app = express();
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
 

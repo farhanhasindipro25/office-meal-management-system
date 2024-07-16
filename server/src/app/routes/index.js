@@ -8,7 +8,7 @@ import { ScheduledMealsRoutes } from "../modules/scheduled-meals/scheduled-meals
 import { OrdersRoutes } from "../modules/orders/orders.routes.js";
 import { AuthRoutes } from "../modules/auth/auth.routes.js";
 
-const APP_ROUTES = Router();
+const apiRoutes = Router();
 
 const moduleRoutes = [
   {
@@ -47,4 +47,4 @@ const moduleRoutes = [
 
 moduleRoutes.forEach((route) => APP_ROUTES.use(route.path, route.route));
 
-export default APP_ROUTES;
+export default apiRoutes;

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import cn from "@/common/helpers/UtilKit";
 import { cva } from "class-variance-authority";
 import {

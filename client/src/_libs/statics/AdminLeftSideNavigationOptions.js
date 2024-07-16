@@ -1,5 +1,6 @@
 import {
   BoltIcon,
+  CalendarDaysIcon,
   Square2StackIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/outline";
@@ -23,6 +24,6 @@ export const adminLeftSideNavigationOptions = [
   {
     name: "Meal Orders",
     href: "/admin/orders",
-    icon: BoltIcon,
+    icon: CalendarDaysIcon,
   },
 ];

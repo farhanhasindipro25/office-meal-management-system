@@ -7,6 +7,8 @@ import { useAdminLoginMutation } from "../../../services/redux/api/admin/adminAp
 import { ADMIN_LOGIN_INITIAL_VALUES } from "../../../form-initial-values/adminLogin";
 import { ADMIN_LOGIN_SCHEMA } from "../../../formik-schema/adminLoginSchema";
 import { useState } from "react";
+import GenericErrorBox from "../../errors/GenericErrorBox";
+import FormikErrorBox from "../../errors/FormikErrorBox";
 
 export default function LoginForm() {
   const [login, { isLoading, error }] = useAdminLoginMutation();
@@ -55,6 +57,9 @@ export default function LoginForm() {
         Office meal Management System
       </h2>
       <form onSubmit={formik.handleSubmit} className="space-y-4">
+        {backendErrors ? (
+          <GenericErrorBox backendErrors={backendErrors} />
+        ) : null}
         <TextInputField
           label="Email *"
           id="email"
@@ -64,6 +69,7 @@ export default function LoginForm() {
           onBlur={formik.handleBlur}
           value={formik.values.email}
         />
+        <FormikErrorBox formik={formik} field="email" />
         <PasswordInputField
           label="Password *"
           id="password"
@@ -73,6 +79,7 @@ export default function LoginForm() {
           onBlur={formik.handleBlur}
           value={formik.values.password}
         />
+        <FormikErrorBox formik={formik} field="password" />
         <Button
           variant="primary"
           onClick={formik.handleSubmit}

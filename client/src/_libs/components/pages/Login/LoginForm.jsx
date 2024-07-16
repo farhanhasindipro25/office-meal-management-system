@@ -3,22 +3,27 @@ import { useDispatch } from "react-redux";
 import Button from "../../ui/Button";
 import PasswordInputField from "../../ui/PasswordInputField";
 import TextInputField from "../../ui/TextInputField";
-import { useAdminLoginMutation } from "../../../services/redux/api/admin/adminApiSlice";
-import { ADMIN_LOGIN_INITIAL_VALUES } from "../../../form-initial-values/adminLogin";
-import { ADMIN_LOGIN_SCHEMA } from "../../../formik-schema/adminLoginSchema";
+import { LOGIN_INITIAL_VALUES } from "../../../form-initial-values/login";
+import { LOGIN_SCHEMA } from "../../../formik-schema/loginSchema";
 import { useState } from "react";
 import GenericErrorBox from "../../errors/GenericErrorBox";
 import FormikErrorBox from "../../errors/FormikErrorBox";
 
+import DisabledButton from "../../ui/DisabledButton";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useLoginMutation } from "../../../services/redux/api/authApiSlice";
+import { setCredentials } from "../../../services/redux/features/authSlice";
+
 export default function LoginForm() {
-  const [login, { isLoading, error }] = useAdminLoginMutation();
+  const [login, { isLoading: login_loading, error }] = useLoginMutation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [backendErrors, setBackendErrors] = useState("");
 
-  console.log("Login Error:", error || "No Error");
   const formik = useFormik({
-    initialValues: ADMIN_LOGIN_INITIAL_VALUES,
-    validationSchema: ADMIN_LOGIN_SCHEMA,
+    initialValues: LOGIN_INITIAL_VALUES,
+    validationSchema: LOGIN_SCHEMA,
     onSubmit: async (values, { setSubmitting }) => {
       setSubmitting(true);
       try {
@@ -28,29 +33,38 @@ export default function LoginForm() {
         };
         const result = await login(user);
         console.log(result);
-        if (result?.data?.status === 200) {
+        if (error) {
+          setBackendErrors(error.message);
+        }
+        if (result?.data?.status === 201) {
           dispatch(
-            setClientLoginCredentials({
+            setCredentials({
+              token: result.data.data.tokens.accessToken,
               user: user,
-              accessToken: result.data.token,
             })
           );
-          //   toast.success("You have logged in to your client portal!");
-          //   router.push("/client");
-        } else if (result?.error?.status === 400) {
-          setBackendErrors(
-            result?.error?.data?.message || "Login credentials are invalid!"
-          );
-          //   toast.error("Login credentials are invalid!");
+          toast.success("You have logged in as an admin!");
+          navigate("/admin");
+        } else if (
+          result?.error?.status === 401 &&
+          result?.error?.data?.message ===
+            "Unauthorized: An account with this email does not exist."
+        ) {
+          setBackendErrors("An account with this email does not exist!");
+          toast.error("An account with this email does not exist!");
+        } else if (result?.error?.status === "FETCH_ERROR") {
+          setBackendErrors("Login credentials are invalid!");
+          toast.error("Login credentials are invalid!");
         }
       } catch (error) {
+        console.log(error);
         setBackendErrors(error.message);
-        // toast.error("There was a problem logging in. Please try again later!");
-        console.warn("Login failed", error.message);
+        toast.error("There was a problem logging in. Please try again later!");
       }
       setSubmitting(false);
     },
   });
+
   return (
     <div className="w-full border space-y-6 border-gray-300 rounded-lg p-4">
       <h2 className="font-semibold text-gray-900 text-center">
@@ -80,13 +94,24 @@ export default function LoginForm() {
           value={formik.values.password}
         />
         <FormikErrorBox formik={formik} field="password" />
-        <Button
-          variant="primary"
-          onClick={formik.handleSubmit}
-          className="w-full justify-center"
-        >
-          Login
-        </Button>
+        {!(formik.values.email && formik.values.password) || login_loading ? (
+          <DisabledButton
+            loading={login_loading.toString()}
+            variant="primary"
+            className="w-full justify-center"
+          >
+            {login_loading ? "Logging you in..." : "Login"}
+          </DisabledButton>
+        ) : (
+          <Button
+            variant="primary"
+            type="submit"
+            loading={login_loading.toString()}
+            className="w-full justify-center"
+          >
+            Login
+          </Button>
+        )}
       </form>
     </div>
   );

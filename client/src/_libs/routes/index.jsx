@@ -6,6 +6,8 @@ import ItemManagement from "../../pages/admin/ItemManagement";
 import MealManagement from "../../pages/admin/MealManagement";
 import MealOrders from "../../pages/admin/MealOrders";
 import UserManagement from "../../pages/admin/UserManagement";
+import AdminAuthGuardHOC from "../components/pages/Admin/AdminAuthGuardHOC";
+import EmployeeAuthGuardHOC from "../components/pages/Employee/EmployeeAuthGuardHOC";
 
 const router = createBrowserRouter([
   {
@@ -14,29 +16,53 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <AdminLayout />,
+    element: (
+      <AdminAuthGuardHOC>
+        <AdminLayout />
+      </AdminAuthGuardHOC>
+    ),
     children: [
       {
         path: "/admin",
-        element: <UserManagement />,
+        element: (
+          <AdminAuthGuardHOC>
+            <UserManagement />
+          </AdminAuthGuardHOC>
+        ),
       },
       {
         path: "/admin/items",
-        element: <ItemManagement />,
+        element: (
+          <AdminAuthGuardHOC>
+            <ItemManagement />
+          </AdminAuthGuardHOC>
+        ),
       },
       {
         path: "/admin/meals",
-        element: <MealManagement />,
+        element: (
+          <AdminAuthGuardHOC>
+            <MealManagement />
+          </AdminAuthGuardHOC>
+        ),
       },
       {
         path: "/admin/orders",
-        element: <MealOrders />,
+        element: (
+          <AdminAuthGuardHOC>
+            <MealOrders />
+          </AdminAuthGuardHOC>
+        ),
       },
     ],
   },
   {
     path: "/employee",
-    element: <EmployeesLayout />,
+    element: (
+      <EmployeeAuthGuardHOC>
+        <EmployeesLayout />
+      </EmployeeAuthGuardHOC>
+    ),
     children: [
       //   {
       //     path: "/dashboard",

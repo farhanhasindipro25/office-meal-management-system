@@ -1,19 +1,19 @@
 import { Router } from "express";
 import { CategoriesController } from "./categories.controller.js";
-import AuthenticateUser from "../../middlewares/AuthenticateUser.js";
-import AuthorizeUser from "../../middlewares/AuthorizeUser.js";
+import authenticateUser from "../../middlewares/authenticateUser.js";
+import authorizeUser from "../../middlewares/authorizeUser.js";
 
 const router = Router();
 router.post(
   "/create-category",
-  AuthenticateUser,
-  AuthorizeUser("ADMIN"),
+  authenticateUser,
+  authorizeUser("ADMIN"),
   CategoriesController.addCategory
 );
 router.get(
   "/",
-  AuthenticateUser,
-  AuthorizeUser("ADMIN"),
+  authenticateUser,
+  authorizeUser("ADMIN"),
   CategoriesController.getCategories
 );
 

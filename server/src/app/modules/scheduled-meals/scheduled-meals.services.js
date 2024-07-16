@@ -1,22 +1,27 @@
 import pool from "../../../db.js";
 import { ScheduledMealsRepository } from "./scheduled-meals.repository.js";
+import { ScheduledMealsUtils } from "./scheduled-meals.utils.js";
 
-const ADD_SCHEDULED_MEAL_TO_DB = async (schedule_id, item_id) => {
+const addScheduledMealToDB = async (schedule_id, item_id) => {
+  const violationError = await ScheduledMealsUtils.checkMealConstraints(
+    schedule_id,
+    item_id
+  );
   const response = await pool.query(
-    ScheduledMealsRepository.POST_SCHEDULED_MEAL_TO_DB,
+    ScheduledMealsRepository.postScheduledMealsToDB,
     [schedule_id, item_id]
   );
-  return response;
+  return { violationError, response };
 };
 
-const READ_SCHEDULED_MEALS_FROM_DB = async () => {
+const readScheduledMealsFromDB = async () => {
   const response = await pool.query(
-    ScheduledMealsRepository.GET_SCHEDULED_MEALS_FROM_DB
+    ScheduledMealsRepository.getScheduledMealsFromDB
   );
   return response;
 };
 
 export const ScheduledMealsServices = {
-  ADD_SCHEDULED_MEAL_TO_DB,
-  READ_SCHEDULED_MEALS_FROM_DB,
+  addScheduledMealToDB,
+  readScheduledMealsFromDB,
 };

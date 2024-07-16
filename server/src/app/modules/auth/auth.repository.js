@@ -1,4 +1,4 @@
-const FIND_USER = `
+const findUser = `
 SELECT 
   users.id, 
   users.user_name, 
@@ -18,5 +18,5 @@ WHERE users.email=($1)
 `;
 
 export const AuthRepository = {
-  FIND_USER,
+  findUser,
 };

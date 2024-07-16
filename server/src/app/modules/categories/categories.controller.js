@@ -3,7 +3,7 @@ import { CategoriesServices } from "./categories.services.js";
 const addCategory = async (req, res) => {
   const { name, description } = req.body;
   try {
-    await CategoriesServices.ADD_CATEGORY_TO_DB(name, description);
+    await CategoriesServices.addCategoryToDb(name, description);
     res.status(201).json({
       status: 201,
       message: "Added new category",
@@ -25,7 +25,7 @@ const addCategory = async (req, res) => {
 
 const getCategories = async (req, res) => {
   try {
-    const result = await CategoriesServices.READ_CATEGORIES_FROM_DB();
+    const result = await CategoriesServices.readCategoriesFromDB();
     res.status(200).json({
       status: 200,
       message: "Categories data retrieved.",
@@ -34,7 +34,6 @@ const getCategories = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       status: 500,
       message: "Internal Server Error",

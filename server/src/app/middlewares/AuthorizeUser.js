@@ -1,4 +1,4 @@
-const AuthorizeUser = (roles = []) => {
+const authorizeUser = (roles = []) => {
   if (typeof roles === "string") {
     roles = [roles];
   }
@@ -31,4 +31,4 @@ const AuthorizeUser = (roles = []) => {
   };
 };
 
-export default AuthorizeUser;
+export default authorizeUser;

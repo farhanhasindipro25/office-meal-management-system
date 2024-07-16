@@ -3,12 +3,12 @@ import pool from "../../../db.js";
 import { AuthRepository } from "./auth.repository.js";
 import config from "../../config/index.js";
 
-const LOGIN_USER = async (email, password) => {
-  const response = await pool.query(AuthRepository.FIND_USER, [email]);
+const loginUser = async (email) => {
+  const response = await pool.query(AuthRepository.findUser, [email]);
   return response;
 };
 
-const VERIFY_REFRESH_TOKEN = async (token) => {
+const verifyRefreshToken = async (token) => {
   try {
     const decoded = jwt.verify(token, config.refresh_token_secret);
     return { valid: true, decoded };
@@ -18,6 +18,6 @@ const VERIFY_REFRESH_TOKEN = async (token) => {
 };
 
 export const AuthServices = {
-  LOGIN_USER,
-  VERIFY_REFRESH_TOKEN,
+  loginUser,
+  verifyRefreshToken,
 };

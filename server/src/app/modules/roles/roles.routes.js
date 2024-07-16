@@ -1,19 +1,19 @@
 import { Router } from "express";
 import { RolesController } from "./roles.controller.js";
-import AuthenticateUser from "../../middlewares/AuthenticateUser.js";
-import AuthorizeUser from "../../middlewares/AuthorizeUser.js";
+import authenticateUser from "../../middlewares/AuthenticateUser.js";
+import authorizeUser from "../../middlewares/authorizeUser.js";
 
 const router = Router();
 router.post(
   "/create-role",
-  AuthenticateUser,
-  AuthorizeUser("ADMIN"),
+  authenticateUser,
+  authorizeUser("ADMIN"),
   RolesController.addRole
 );
 router.get(
   "/",
-  AuthenticateUser,
-  AuthorizeUser("ADMIN"),
+  authenticateUser,
+  authorizeUser("ADMIN"),
   RolesController.getRoles
 );
 

@@ -1,10 +1,10 @@
-const POST_USER_TO_DB = `
+const postUserToDB = `
   INSERT INTO users (user_name, employee_id, email, phone, gender, password, role_id)
   VALUES ($1, $2, $3, $4, $5, $6, $7)
   RETURNING id, user_name, employee_id, email, phone, gender, role_id, is_banned, created_at, updated_at
 `;
 
-const GET_USERS_FROM_DB = `
+const getUsersFromDB = `
 SELECT 
     users.id,
     users.user_name,
@@ -25,7 +25,7 @@ ON
     users.role_id = roles.id;
 `;
 
-const GET_USER_BY_ID_FROM_DB = `
+const getUserByIdFromDB = `
 SELECT 
     users.id,
     users.user_name,
@@ -48,7 +48,7 @@ WHERE
     users.id = $1;
 `;
 
-const PATCH_USER_IN_DB = `
+const patchUserInDB = `
 UPDATE users SET
     user_name = $1,
     employee_id = $2,
@@ -60,20 +60,20 @@ UPDATE users SET
 WHERE id = $7 RETURNING *
 `;
 
-const BAN_USER_IN_DB = `
+const banUserInDB = `
 UPDATE users SET
     is_banned = $1,
     updated_at = NOW() 
 WHERE id = $2 RETURNING *
 `;
 
-const CHECK_EMAIL_EXISTS = "SELECT * FROM users WHERE email=($1)";
+const checkEmailExists = "SELECT * FROM users WHERE email=($1)";
 
 export const UsersRepository = {
-  POST_USER_TO_DB,
-  GET_USERS_FROM_DB,
-  GET_USER_BY_ID_FROM_DB,
-  PATCH_USER_IN_DB,
-  BAN_USER_IN_DB,
-  CHECK_EMAIL_EXISTS,
+  postUserToDB,
+  getUsersFromDB,
+  getUserByIdFromDB,
+  patchUserInDB,
+  banUserInDB,
+  checkEmailExists,
 };

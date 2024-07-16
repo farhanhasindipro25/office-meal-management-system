@@ -1,37 +1,37 @@
 import { Router } from "express";
 import { UsersController } from "./users.controller.js";
-import AuthorizeUser from "../../middlewares/AuthorizeUser.js";
-import AuthenticateUser from "../../middlewares/AuthenticateUser.js";
+import authenticateUser from "../../middlewares/AuthenticateUser.js";
+import authorizeUser from "../../middlewares/authorizeUser.js";
 
 const router = Router();
 router.post(
   "/create-user",
-  AuthenticateUser,
-  AuthorizeUser("ADMIN"),
+  authenticateUser,
+  authorizeUser("ADMIN"),
   UsersController.addUser
 );
 router.get(
   "/",
-  AuthenticateUser,
-  AuthorizeUser("ADMIN"),
+  authenticateUser,
+  authorizeUser("ADMIN"),
   UsersController.getUsers
 );
 router.get(
   "/:id",
-  AuthenticateUser,
-  AuthorizeUser("GENERAL_USER"),
+  authenticateUser,
+  authorizeUser("GENERAL_USER"),
   UsersController.getUserById
 );
 router.patch(
   "/:id/edit",
-  AuthenticateUser,
-  AuthorizeUser("ADMIN"),
+  authenticateUser,
+  authorizeUser("ADMIN"),
   UsersController.editUser
 );
 router.patch(
   "/:id/ban",
-  AuthenticateUser,
-  AuthorizeUser("ADMIN"),
+  authenticateUser,
+  authorizeUser("ADMIN"),
   UsersController.banUser
 );
 

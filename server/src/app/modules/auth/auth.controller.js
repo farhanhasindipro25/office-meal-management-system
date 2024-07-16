@@ -5,7 +5,7 @@ import jwtHelper from "../../utils/jwtHelper.js";
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const result = await AuthServices.LOGIN_USER(email);
+    const result = await AuthServices.loginUser(email);
     if (!email || !password) {
       res.status(400).json({
         status: 400,
@@ -41,7 +41,6 @@ const loginUser = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       status: 500,
       message: "Internal Server Error",
@@ -50,7 +49,7 @@ const loginUser = async (req, res) => {
   }
 };
 
-const refreshToken = async (req, res) => {
+const getRefreshToken = async (req, res) => {
   const { refresh_token } = req.cookies;
   if (!refresh_token) {
     return res.status(401).json({
@@ -60,7 +59,7 @@ const refreshToken = async (req, res) => {
   }
 
   try {
-    const { valid, decoded, error } = await AuthServices.VERIFY_REFRESH_TOKEN(
+    const { valid, decoded, error } = await AuthServices.verifyRefreshToken(
       refresh_token
     );
     if (!valid) {
@@ -80,7 +79,6 @@ const refreshToken = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       status: 500,
       message: "Internal Server Error",
@@ -91,5 +89,5 @@ const refreshToken = async (req, res) => {
 
 export const AuthController = {
   loginUser,
-  refreshToken,
+  getRefreshToken,
 };

@@ -1,6 +1,6 @@
-const POST_ITEM_TO_DB = "INSERT INTO items (category_id, name) VALUES ($1,$2)";
+const postItemToDB = "INSERT INTO items (category_id, name) VALUES ($1,$2)";
 
-const GET_ITEMS_FROM_DB = `
+const getItemsFromDB = `
 SELECT 
     items.id,
     items.name,
@@ -16,6 +16,6 @@ ON
 `;
 
 export const ItemsRepository = {
-  POST_ITEM_TO_DB,
-  GET_ITEMS_FROM_DB,
+  postItemToDB,
+  getItemsFromDB,
 };

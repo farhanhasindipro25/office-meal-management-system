@@ -3,7 +3,7 @@ import { SchedulesServices } from "./weekly-schedules.services.js";
 const addSchedule = async (req, res) => {
   const { working_day } = req.body;
   try {
-    await SchedulesServices.ADD_SCHEDULE_TO_DB(working_day);
+    await SchedulesServices.addScheduleToDB(working_day);
     res.status(201).json({
       status: 201,
       message: "Added new schedule",
@@ -24,7 +24,7 @@ const addSchedule = async (req, res) => {
 
 const getSchedules = async (req, res) => {
   try {
-    const result = await SchedulesServices.READ_SCHEDULE_FROM_DB();
+    const result = await SchedulesServices.readScheduleFromDB();
     res.status(200).json({
       status: 200,
       message: "Schedules data retrieved.",

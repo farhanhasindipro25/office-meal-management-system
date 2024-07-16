@@ -1,7 +1,7 @@
-const POST_ORDER_TO_DB =
+const postOrderToDB =
   "INSERT INTO orders (user_id,wants_meal, meal_id, date, month) VALUES ($1,$2,$3,$4,EXTRACT(MONTH FROM CURRENT_DATE))";
 
-const GET_USER_ORDERS_FROM_DB = `
+const getUserOrdersFromDB = `
   SELECT
     orders.id AS order_id,
     orders.user_id,
@@ -29,7 +29,7 @@ ORDER BY
     orders.date
 `;
 
-const GET_ALL_ORDERS_FROM_DB = `
+const getAllOrdersFromDB = `
 SELECT
     users.id AS user_id,
     users.user_name,
@@ -65,7 +65,7 @@ ORDER BY
 `;
 
 export const OrdersRepository = {
-  POST_ORDER_TO_DB,
-  GET_ALL_ORDERS_FROM_DB,
-  GET_USER_ORDERS_FROM_DB,
+  postOrderToDB,
+  getAllOrdersFromDB,
+  getUserOrdersFromDB,
 };

@@ -5,9 +5,7 @@ const addUser = async (req, res) => {
   const { user_name, employee_id, email, phone, gender, password, role_id } =
     req.body;
   try {
-    const emailAlreadyExists = await UsersServices.CHECK_EMAIL_EXISTS_IN_DB(
-      email
-    );
+    const emailAlreadyExists = await UsersServices.checkEmailExistsInDB(email);
     if (emailAlreadyExists.rows.length > 0) {
       return res.status(400).json({
         status: 400,
@@ -15,7 +13,7 @@ const addUser = async (req, res) => {
       });
     }
     const password_hashed = await bcrypt.hash(password, 10);
-    await UsersServices.ADD_USER_TO_DB(
+    await UsersServices.addUserToDB(
       user_name,
       employee_id,
       email,
@@ -49,7 +47,7 @@ const addUser = async (req, res) => {
 
 const getUsers = async (req, res) => {
   try {
-    const result = await UsersServices.READ_USERS_FROM_DB();
+    const result = await UsersServices.readUsersFromDB();
     res.status(200).json({
       status: 200,
       message: "Users data retrieved.",
@@ -69,7 +67,7 @@ const getUsers = async (req, res) => {
 const getUserById = async (req, res) => {
   const userID = req.params.id;
   try {
-    const result = await UsersServices.READ_USER_BY_ID_FROM_DB(userID);
+    const result = await UsersServices.readUserByIdFromDB(userID);
 
     res.status(200).json({
       status: 200,
@@ -79,7 +77,6 @@ const getUserById = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       status: 500,
       message: "Internal Server Error",
@@ -92,7 +89,7 @@ const editUser = async (req, res) => {
   const userID = req.params.id;
   const { user_name, employee_id, email, phone, gender, role_id } = req.body;
   try {
-    const result = await UsersServices.UPDATE_USER_IN_DB(
+    const result = await UsersServices.updateUserInDB(
       user_name,
       employee_id,
       email,
@@ -121,7 +118,7 @@ const banUser = async (req, res) => {
   const userID = req.params.id;
   const { is_banned } = req.body;
   try {
-    await UsersServices.BAN_USER_IN_DB(is_banned, userID);
+    await UsersServices.banUserInDB(is_banned, userID);
     if (is_banned === true) {
       res.status(201).json({
         status: 201,
@@ -139,7 +136,6 @@ const banUser = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       status: 500,
       message: "Internal Server Error",

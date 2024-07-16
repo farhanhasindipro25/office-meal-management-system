@@ -1,15 +1,20 @@
 import { Router } from "express";
 import { ScheduledMealsController } from "./scheduled-meals.controller.js";
-import AuthenticateUser from "../../middlewares/AuthenticateUser.js";
-import AuthorizeUser from "../../middlewares/AuthorizeUser.js";
+import authenticateUser from "../../middlewares/AuthenticateUser.js";
+import authorizeUser from "../../middlewares/authorizeUser.js";
 
 const router = Router();
 router.post(
   "/create-scheduled-meal",
-  AuthenticateUser,
-  AuthorizeUser("ADMIN"),
+  authenticateUser,
+  authorizeUser("ADMIN"),
   ScheduledMealsController.addScheduledMeal
 );
-router.get("/", AuthenticateUser, ScheduledMealsController.getScheduledMeals);
+router.get(
+  "/",
+  authenticateUser,
+  authorizeUser("ADMIN"),
+  ScheduledMealsController.getScheduledMeals
+);
 
 export const ScheduledMealsRoutes = router;

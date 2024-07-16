@@ -1,19 +1,19 @@
 import { Router } from "express";
 import { SchedulesController } from "./weekly-schedules.controller.js";
-import AuthenticateUser from "../../middlewares/AuthenticateUser.js";
-import AuthorizeUser from "../../middlewares/AuthorizeUser.js";
+import authenticateUser from "../../middlewares/AuthenticateUser.js";
+import authorizeUser from "../../middlewares/authorizeUser.js";
 
 const router = Router();
 router.post(
   "/create-schedule",
-  AuthenticateUser,
-  AuthorizeUser("ADMIN"),
+  authenticateUser,
+  authorizeUser("ADMIN"),
   SchedulesController.addSchedule
 );
 router.get(
   "/",
-  AuthenticateUser,
-  AuthorizeUser("ADMIN"),
+  authenticateUser,
+  authorizeUser("ADMIN"),
   SchedulesController.getSchedules
 );
 

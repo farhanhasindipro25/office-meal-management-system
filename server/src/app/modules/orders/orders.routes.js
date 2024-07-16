@@ -1,25 +1,25 @@
 import { Router } from "express";
 import { OrdersController } from "./orders.controller.js";
-import AuthenticateUser from "../../middlewares/AuthenticateUser.js";
-import AuthorizeUser from "../../middlewares/AuthorizeUser.js";
+import authenticateUser from "../../middlewares/AuthenticateUser.js";
+import authorizeUser from "../../middlewares/authorizeUser.js";
 
 const router = Router();
 router.post(
   "/:id/create-order",
-  AuthenticateUser,
-  AuthorizeUser("GENERAL_USER"),
+  authenticateUser,
+  authorizeUser("GENERAL_USER"),
   OrdersController.addOrder
 );
 router.get(
   "/all",
-  AuthenticateUser,
-  AuthorizeUser("ADMIN"),
+  authenticateUser,
+  authorizeUser("ADMIN"),
   OrdersController.getAllOrders
 );
 router.get(
   "/:id",
-  AuthenticateUser,
-  AuthorizeUser("GENERAL_USER"),
+  authenticateUser,
+  authorizeUser("GENERAL_USER"),
   OrdersController.getUserOrders
 );
 

@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { adminApiSlice } from "./api/adminApiSlice";
+import { adminApiSlice } from "./api/admin/adminApiSlice";
 import adminAuthReducer from "./features/admin/adminAuthSlice";
 
 export const store = configureStore({

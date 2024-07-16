@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import { AuthServices } from "./auth.services.js";
-import jwtHelper from "../../utils/jwtHelper.js";
+import { AuthUtils } from "./auth.utils.js";
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -30,7 +30,7 @@ const loginUser = async (req, res) => {
         message: "Unauthorized: Incorrect Password.",
       });
 
-    let tokens = jwtHelper(result.rows[0]);
+    let tokens = AuthUtils.jwtHelper(result.rows[0]);
     res.cookie("refresh_token", tokens.refreshToken, { httpOnly: true });
     res.status(201).json({
       status: 201,
@@ -70,7 +70,7 @@ const getRefreshToken = async (req, res) => {
       });
     }
 
-    const newAccessToken = jwtHelper(decoded).accessToken;
+    const newAccessToken = AuthUtils.jwtHelper(decoded).accessToken;
     return res.status(201).json({
       status: 201,
       message: "New access token generated",

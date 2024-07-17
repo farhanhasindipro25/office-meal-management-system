@@ -11,11 +11,12 @@ import {
   DEFAULT_TAB_STYLES,
   DEFAULT_TEXT_STYLES,
 } from "../../../styles/pages/LeftSideNavigationStyles";
-import { adminLeftSideNavigationOptions } from "../../../statics/AdminLeftSideNavigationOptions";
+
 import Button from "../../ui/Button";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../services/redux/features/authSlice";
+import { adminNavigationOptions } from "../../../statics/AdminNavigationOptions";
 
 export default function AdminLeftSideNavigations() {
   const { pathname } = useLocation();
@@ -27,19 +28,21 @@ export default function AdminLeftSideNavigations() {
     navigate("/");
   };
   return (
-    <div className="w-1/5 h-screen bg-white border-r border-gray-300">
+    <div className="w-full h-screen bg-white border-r border-gray-300">
       <div className="divide-y divide-gray-200">
-        <div className="p-4 flex items-center gap-4">
-          <UserIcon className="w-12 h-12 p-3 rounded-full bg-indigo-100 text-indigo-600" />
-          <div className="w-3/4">
-            <h2 className="font-semibold text-gray-700">FARHAN HASIN DIPRO</h2>
-            <h2 className="text-sm font-medium text-gray-500">
+        <div className="p-4 w-full flex justify-start gap-4 items-center">
+          <UserIcon className="w-10 h-10 p-2 rounded-full bg-indigo-100 text-indigo-600" />
+          <div className="w-3/5">
+            <h2 className="font-semibold text-sm truncate text-gray-700">
+              FARHAN HASIN DIPRO
+            </h2>
+            <h2 className="text-xs font-medium truncate text-gray-500">
               farhan.hasin.25@gmail.com
             </h2>
           </div>
         </div>
         <div>
-          {adminLeftSideNavigationOptions?.map((option, index) => (
+          {adminNavigationOptions?.map((option, index) => (
             <NavLink
               key={index + 1}
               to={option.href}

@@ -5,7 +5,7 @@ import {
   UserGroupIcon,
 } from "@heroicons/react/24/outline";
 
-export const adminLeftSideNavigationOptions = [
+export const adminNavigationOptions = [
   {
     name: "User Management",
     href: "/admin",

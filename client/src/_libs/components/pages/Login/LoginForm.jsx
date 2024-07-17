@@ -32,7 +32,6 @@ export default function LoginForm() {
           password: values.password,
         };
         const result = await login(payload);
-        console.log(result);
 
         if (result?.data?.status === 201) {
           dispatch(

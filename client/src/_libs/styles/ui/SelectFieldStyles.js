@@ -1,10 +1,8 @@
 export const customStyles = {
   control: (provided, state) => ({
     ...provided,
-    borderColor: state.isFocused ? "rgba(5, 150, 105)" : provided.borderColor,
-    boxShadow: state.isFocused
-      ? "0 0 0 2px rgba(25, 200, 105)"
-      : provided.boxShadow,
+    borderColor: state.isFocused ? "#4f46e5" : provided.borderColor,
+    boxShadow: state.isFocused ? "0 0 0 2px #818cf8" : provided.boxShadow,
     border: state.isFocused ? "none" : provided.border,
     paddingTop: "3px",
     paddingBottom: "5px",
@@ -13,15 +11,15 @@ export const customStyles = {
     ...provided,
     backgroundColor:
       (state.isFocused || state.isSelected) && !state.isMulti
-        ? "rgb(5, 150, 105)"
+        ? "#6366f1"
         : provided.backgroundColor,
     color:
       (state.isFocused || state.isSelected) && !state.isMulti
-        ? "white"
-        : "rgb(15, 23, 42)",
+        ? "#ffffff"
+        : "#1a202c",
     "&:hover": {
-      backgroundColor: "rgb(4, 120, 87)",
-      color: "white",
+      backgroundColor: "#818cf8",
+      color: "#ffffff",
       cursor: "pointer",
     },
     overflow: "hidden",
@@ -29,19 +27,19 @@ export const customStyles = {
   }),
   singleValue: (provided) => ({
     ...provided,
-    color: "rgb(15, 23, 42)",
+    color: "#1a202c",
   }),
   menu: (provided) => ({
     ...provided,
-    backgroundColor: "white",
+    backgroundColor: "#ffffff",
   }),
   input: (provided) => ({
     ...provided,
-    "input:focus": {
+    "&:focus": {
       boxShadow: "none",
     },
   }),
 };
 
 export const SELECT_LABEL_STYLES =
-  "appearance-none block text-base font-semibold text-neutral-700";
+  "appearance-none block text-sm font-medium text-neutral-700";

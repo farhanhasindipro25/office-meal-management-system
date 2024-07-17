@@ -22,7 +22,21 @@ FROM
 INNER JOIN 
     roles
 ON 
-    users.role_id = roles.id;
+    users.role_id = roles.id
+WHERE 
+    ($1::text IS NULL OR users.user_name = $1)
+AND 
+    ($2::boolean IS NULL OR users.is_banned = $2)
+AND 
+    ($3::text IS NULL OR roles.name = $3)
+AND 
+    ($4::text IS NULL OR users.gender = $4)
+ORDER BY 
+    users.id
+LIMIT 
+    $5
+OFFSET 
+    $6;
 `;
 
 const getUserByIdFromDB = `

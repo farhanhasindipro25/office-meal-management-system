@@ -46,8 +46,20 @@ const addUser = async (req, res) => {
 };
 
 const getUsers = async (req, res) => {
+  const { user_name, is_banned, role_name, gender, page, limit } = req.query;
+  const pageSize = parseInt(limit) || 10;
+  const pageNumber = parseInt(page) || 1;
+  const offset = (pageNumber - 1) * pageSize;
+
   try {
-    const result = await UsersServices.readUsersFromDB();
+    const result = await UsersServices.readUsersFromDB(
+      user_name,
+      is_banned,
+      role_name,
+      gender,
+      pageSize,
+      offset
+    );
     res.status(200).json({
       status: 200,
       message: "Users data retrieved.",

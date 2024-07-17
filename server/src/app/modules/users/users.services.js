@@ -22,8 +22,22 @@ const addUserToDB = async (
   return response;
 };
 
-const readUsersFromDB = async () => {
-  const response = await pool.query(UsersRepository.getUsersFromDB);
+const readUsersFromDB = async (
+  user_name,
+  is_banned,
+  role_name,
+  gender,
+  limit,
+  offset
+) => {
+  const response = await pool.query(UsersRepository.getUsersFromDB, [
+    user_name || null,
+    is_banned || null,
+    role_name || null,
+    gender || null,
+    limit || 10,
+    offset || 0,
+  ]);
   return response;
 };
 

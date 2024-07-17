@@ -27,12 +27,12 @@ export default function LoginForm() {
     onSubmit: async (values, { setSubmitting }) => {
       setSubmitting(true);
       try {
-        const user = {
+        const payload = {
           email: values.email,
           password: values.password,
         };
-        const result = await login(user);
-        console.log(result);
+        const result = await login(payload);
+
         if (error) {
           setBackendErrors(error.message);
         }
@@ -40,11 +40,19 @@ export default function LoginForm() {
           dispatch(
             setCredentials({
               token: result.data.data.tokens.accessToken,
-              user: user,
+              user: {
+                user: payload,
+                role: result.data.data.user.role_name,
+              },
             })
           );
-          toast.success("You have logged in as an admin!");
-          navigate("/admin");
+          if (result.data.data.user.role_name === "ADMIN") {
+            toast.success("You have logged in as an admin!");
+            navigate("/admin");
+          } else if (result.data.data.user.role_name === "GENERAL_USER") {
+            toast.success("You have logged in successfully!");
+            navigate("/employee");
+          }
         } else if (
           result?.error?.status === 401 &&
           result?.error?.data?.message ===
@@ -52,9 +60,17 @@ export default function LoginForm() {
         ) {
           setBackendErrors("An account with this email does not exist!");
           toast.error("An account with this email does not exist!");
+        } else if (
+          result?.error?.status === "401" &&
+          result?.error?.data?.message === "Unauthorized: Incorrect Password."
+        ) {
+          setBackendErrors("Incorrect password!");
+          toast.error("Incorrect Password");
         } else if (result?.error?.status === "FETCH_ERROR") {
-          setBackendErrors("Login credentials are invalid!");
-          toast.error("Login credentials are invalid!");
+          setBackendErrors(
+            "The server ran into an issue. Please try again later"
+          );
+          toast.error("The server ran into an issue. Please try again later");
         }
       } catch (error) {
         console.log(error);

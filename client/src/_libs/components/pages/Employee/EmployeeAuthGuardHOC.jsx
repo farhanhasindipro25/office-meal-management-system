@@ -6,7 +6,6 @@ import {
   setCredentials,
 } from "../../../services/redux/features/authSlice";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 
 export default function EmployeeAuthGuardHOC({ children }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -14,11 +13,11 @@ export default function EmployeeAuthGuardHOC({ children }) {
   const user = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log(user);
+
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     if (storedToken && !token) {
-      dispatch(setCredentials({ user: user, accessToken: storedToken }));
+      dispatch(setCredentials({ user: user, token: storedToken }));
       setIsLoading(false);
     } else {
       setIsLoading(false);
@@ -30,13 +29,6 @@ export default function EmployeeAuthGuardHOC({ children }) {
       navigate("/");
     }
   }, [isLoading, token, navigate]);
-
-  useEffect(() => {
-    if (user && user.role !== "GENERAL_USER") {
-      navigate("/");
-      toast.error("You do not have permission to access this resource");
-    }
-  }, [user, navigate]);
 
   return isLoading ? null : <>{children}</>;
 }

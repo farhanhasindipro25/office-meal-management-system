@@ -63,12 +63,7 @@ const router = createBrowserRouter([
         <EmployeesLayout />
       </EmployeeAuthGuardHOC>
     ),
-    children: [
-      //   {
-      //     path: "/dashboard",
-      //     element: <Dashboard />,
-      //   },
-    ],
+    children: [],
   },
 ]);
 

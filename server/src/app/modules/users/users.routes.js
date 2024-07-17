@@ -16,12 +16,7 @@ router.get(
   authorizeUser("ADMIN"),
   UsersController.getUsers
 );
-router.get(
-  "/:id",
-  authenticateUser,
-  authorizeUser("GENERAL_USER"),
-  UsersController.getUserById
-);
+router.get("/:id", authenticateUser, UsersController.getUserById);
 router.patch(
   "/:id/edit",
   authenticateUser,

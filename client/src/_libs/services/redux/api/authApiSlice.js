@@ -2,7 +2,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReAuth } from "../apiConfig/baseQueryWithReAuth";
 
 export const authApiSlice = createApi({
-  reducerPath: "clientApi",
+  reducerPath: "api",
   baseQuery: baseQueryWithReAuth,
   endpoints: (builder) => ({
     login: builder.mutation({

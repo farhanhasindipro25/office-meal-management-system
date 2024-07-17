@@ -16,7 +16,7 @@ import { useLoginMutation } from "../../../services/redux/api/authApiSlice";
 import { setCredentials } from "../../../services/redux/features/authSlice";
 
 export default function LoginForm() {
-  const [login, { isLoading: login_loading, error }] = useLoginMutation();
+  const [login, { isLoading: login_loading }] = useLoginMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [backendErrors, setBackendErrors] = useState("");
@@ -32,10 +32,8 @@ export default function LoginForm() {
           password: values.password,
         };
         const result = await login(payload);
+        console.log(result);
 
-        if (error) {
-          setBackendErrors(error.message);
-        }
         if (result?.data?.status === 201) {
           dispatch(
             setCredentials({
@@ -53,6 +51,15 @@ export default function LoginForm() {
             toast.success("You have logged in successfully!");
             navigate("/employee");
           }
+        } else if (
+          result?.error?.status === 403 &&
+          result?.error?.data?.message ===
+            "You are not allowed to login as you have been banned"
+        ) {
+          setBackendErrors(
+            "You are not allowed to login as you have been banned"
+          );
+          toast.error("You are not allowed to login as you have been banned");
         } else if (
           result?.error?.status === 401 &&
           result?.error?.data?.message ===
@@ -74,7 +81,6 @@ export default function LoginForm() {
         }
       } catch (error) {
         console.log(error);
-        setBackendErrors(error.message);
         toast.error("There was a problem logging in. Please try again later!");
       }
       setSubmitting(false);

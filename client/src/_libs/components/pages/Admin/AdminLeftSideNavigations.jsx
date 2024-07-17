@@ -1,5 +1,8 @@
-import { NavLink, useLocation } from "react-router-dom";
-import { UserIcon } from "@heroicons/react/24/outline";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import {
+  ArrowLeftStartOnRectangleIcon,
+  UserIcon,
+} from "@heroicons/react/24/outline";
 import {
   ACTIVE_ICON_STYLES,
   ACTIVE_TAB_STYLES,
@@ -9,9 +12,20 @@ import {
   DEFAULT_TEXT_STYLES,
 } from "../../../styles/pages/LeftSideNavigationStyles";
 import { adminLeftSideNavigationOptions } from "../../../statics/AdminLeftSideNavigationOptions";
+import Button from "../../ui/Button";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { logout } from "../../../services/redux/features/authSlice";
 
 export default function AdminLeftSideNavigations() {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+    toast.success("Logged out successfully");
+    navigate("/");
+  };
   return (
     <div className="w-1/5 h-screen bg-white border-r border-gray-300">
       <div className="divide-y divide-gray-200">
@@ -53,6 +67,16 @@ export default function AdminLeftSideNavigations() {
               </h2>
             </NavLink>
           ))}
+        </div>
+        <div className="px-4 w-full flex justify-end pt-4">
+          <Button
+            variant="secondary"
+            className="px-4 py-2 text-sm gap-2"
+            onClick={() => handleLogout()}
+          >
+            <ArrowLeftStartOnRectangleIcon className="w-5 h-5" />
+            Logout
+          </Button>
         </div>
       </div>
     </div>

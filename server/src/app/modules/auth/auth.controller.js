@@ -6,10 +6,17 @@ const loginUser = async (req, res) => {
   const { email, password } = req.body;
   try {
     const result = await AuthServices.loginUser(email);
+
     if (!email || !password) {
       res.status(400).json({
         status: 400,
         message: "Email and password are required!",
+      });
+    }
+    if (result.rows[0].is_banned === true) {
+      res.status(403).json({
+        status: 403,
+        message: "You are not allowed to login as you have been banned",
       });
     }
     if (result.rows.length === 0) {

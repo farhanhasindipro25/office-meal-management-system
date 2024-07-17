@@ -9,6 +9,7 @@ import UserManagement from "../../pages/admin/UserManagement";
 import AdminAuthGuardHOC from "../components/pages/Admin/AdminAuthGuardHOC";
 import EmployeeAuthGuardHOC from "../components/pages/Employee/EmployeeAuthGuardHOC";
 import AddUser from "../../pages/admin/AddUserModal";
+import MyOrders from "../../pages/employee/AddOrder";
 
 const router = createBrowserRouter([
   {
@@ -72,7 +73,16 @@ const router = createBrowserRouter([
         <EmployeesLayout />
       </EmployeeAuthGuardHOC>
     ),
-    children: [],
+    children: [
+      {
+        path: "/employee",
+        element: (
+          <EmployeeAuthGuardHOC>
+            <MyOrders />
+          </EmployeeAuthGuardHOC>
+        ),
+      },
+    ],
   },
 ]);
 

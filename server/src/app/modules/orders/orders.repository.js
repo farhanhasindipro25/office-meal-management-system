@@ -1,5 +1,5 @@
 const postOrderToDB =
-  "INSERT INTO orders (user_id,wants_meal, meal_id, date, month) VALUES ($1,$2,$3,$4,EXTRACT(MONTH FROM CURRENT_DATE))";
+  "INSERT INTO orders (wants_meal, meal_id, date, month) VALUES ($1,$2,$3,EXTRACT(MONTH FROM CURRENT_DATE))";
 
 const getUserOrdersFromDB = `
   SELECT

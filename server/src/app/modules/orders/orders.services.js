@@ -1,9 +1,8 @@
 import pool from "../../../db.js";
 import { OrdersRepository } from "./orders.repository.js";
 
-const addOrderToDB = async (user_id, wants_meal, meal_id, date) => {
+const addOrderToDB = async (wants_meal, meal_id, date) => {
   const response = await pool.query(OrdersRepository.postOrderToDB, [
-    user_id,
     wants_meal,
     meal_id,
     date,

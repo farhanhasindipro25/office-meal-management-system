@@ -1,10 +1,9 @@
 import { OrdersServices } from "./orders.services.js";
 
 const addOrder = async (req, res) => {
-  const userID = req.params.id;
   const { wants_meal, meal_id, date } = req.body;
   try {
-    await OrdersServices.addOrderToDB(userID, wants_meal, meal_id, date);
+    await OrdersServices.addOrderToDB(wants_meal, meal_id, date);
     res.status(201).json({
       status: 201,
       message: "Added new order",

@@ -10,11 +10,6 @@ router.post(
   authorizeUser("ADMIN"),
   ScheduledMealsController.addScheduledMeal
 );
-router.get(
-  "/",
-  authenticateUser,
-  authorizeUser("ADMIN"),
-  ScheduledMealsController.getScheduledMeals
-);
+router.get("/", authenticateUser, ScheduledMealsController.getScheduledMeals);
 
 export const ScheduledMealsRoutes = router;

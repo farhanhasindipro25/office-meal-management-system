@@ -2,10 +2,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import AdminLeftSideNavigations from "../../pages/Admin/AdminLeftSideNavigations";
 import HorizontalTabNavigation from "../../ui/HorizontalTabNavigation";
 import { adminNavigationOptions } from "../../../statics/AdminNavigationOptions";
-import {
-  ArrowLeftStartOnRectangleIcon,
-  UserIcon,
-} from "@heroicons/react/24/outline";
+import { ArrowLeftStartOnRectangleIcon } from "@heroicons/react/24/outline";
 import Button from "../../ui/Button";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
@@ -26,28 +23,15 @@ export default function AdminLayout() {
           <AdminLeftSideNavigations />
         </div>
         <div className="block space-y-4 py-6 px-4 lg:hidden">
-          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-            <div className="w-full flex justify-start gap-4 items-center">
-              <UserIcon className="w-10 h-10 p-2 rounded-full bg-indigo-100 text-indigo-600" />
-              <div className="w-3/5">
-                <h2 className="font-semibold text-sm truncate text-gray-700">
-                  FARHAN HASIN DIPRO
-                </h2>
-                <h2 className="text-xs font-medium truncate text-gray-500">
-                  farhan.hasin.25@gmail.com
-                </h2>
-              </div>
-            </div>
-            <div className="flex justify-end w-full">
-              <Button
-                variant="secondary"
-                className="px-4 text-sm gap-2"
-                onClick={() => handleLogout()}
-              >
-                <ArrowLeftStartOnRectangleIcon className="w-4 h-4" />
-                Logout
-              </Button>
-            </div>
+          <div className="flex justify-end w-full">
+            <Button
+              variant="secondary"
+              className="px-4 text-sm gap-2"
+              onClick={() => handleLogout()}
+            >
+              <ArrowLeftStartOnRectangleIcon className="w-4 h-4" />
+              Logout
+            </Button>
           </div>
           <HorizontalTabNavigation tabs={adminNavigationOptions} />
         </div>

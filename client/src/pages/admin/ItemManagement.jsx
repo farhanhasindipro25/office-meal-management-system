@@ -34,7 +34,7 @@ export default function ItemManagement() {
         refetch={refetch}
         setOpen={setOpenAddItemModal}
       />
-      <ItemsListTable items={data?.data?.items} />
+      <ItemsListTable items={data?.data?.items} refetch={refetch} />
     </div>
   );
 }

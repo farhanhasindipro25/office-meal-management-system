@@ -12,7 +12,9 @@ FROM
 INNER JOIN 
     categories
 ON 
-    items.category_id = categories.id;
+    items.category_id = categories.id
+ORDER BY 
+    items.created_at DESC
 `;
 
 const deleteItemFromDB = "DELETE FROM items WHERE id = $1";

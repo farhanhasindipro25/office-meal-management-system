@@ -1,6 +1,19 @@
+import toast from "react-hot-toast";
+import { deleteItem } from "../../../services/api/admin/items/deleteItem";
 import Button from "../../ui/Button";
 
-export default function ItemsListTable({ items }) {
+export default function ItemsListTable({ items, refetch }) {
+  const handleItemDelete = async (id) => {
+    try {
+      await deleteItem(id);
+      refetch();
+      toast.success("Item deleted");
+    } catch (error) {
+      toast.error(
+        "There was a problem deleting this item. Please try again later"
+      );
+    }
+  };
   return (
     <table className="w-full divide-y divide-gray-300 border rounded-lg shadow-md">
       <thead className="rounded-xl">
@@ -36,6 +49,7 @@ export default function ItemsListTable({ items }) {
             </td>
             <td className="p-4 text-sm text-gray-500 whitespace-nowrap">
               <Button
+                onClick={() => handleItemDelete(item.id)}
                 variant="secondary"
                 className="text-sm border-none shadow-none"
               >

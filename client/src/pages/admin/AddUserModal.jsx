@@ -71,6 +71,7 @@ export default function AddUserModal({ open, setOpen, refetch }) {
           onBlur={formik.handleBlur}
           value={roleOptions.find((el) => el.label === formik.values.role_id)}
         />
+        <FormikErrorBox formik={formik} field="role_id" />
         <div className="flex flex-col items-center gap-4 md:flex-row">
           <div className="w-full space-y-4 md:w-1/2">
             <TextInputField

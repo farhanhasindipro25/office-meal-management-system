@@ -17,8 +17,7 @@ import { postUser } from "../../_libs/services/api/admin/users/postUser";
 import { useState } from "react";
 import DisabledButton from "../../_libs/components/ui/DisabledButton";
 
-export default function AddUserModal(props) {
-  const { open, setOpen } = props;
+export default function AddUserModal({ open, setOpen, refetch }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const formik = useFormik({
     initialValues: ADD_USER_INITIAL_VALUES,
@@ -28,8 +27,10 @@ export default function AddUserModal(props) {
       try {
         const result = await postUser(values);
         if (result.status === 201) {
+          refetch();
           resetForm();
           toast.success("Added new user");
+          setOpen(false);
         } else if (result.status === 400) {
           toast.error("An account with this email already exists");
         }

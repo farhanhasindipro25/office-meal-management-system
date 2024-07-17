@@ -139,14 +139,15 @@ const banUser = async (req, res) => {
           banned_user: userID,
         },
       });
+    } else {
+      res.status(201).json({
+        status: 201,
+        message: "User's ban has been lifted.",
+        data: {
+          banned_user: userID,
+        },
+      });
     }
-    res.status(201).json({
-      status: 201,
-      message: "User's ban has been lifted.",
-      data: {
-        banned_user: userID,
-      },
-    });
   } catch (error) {
     res.status(500).json({
       status: 500,

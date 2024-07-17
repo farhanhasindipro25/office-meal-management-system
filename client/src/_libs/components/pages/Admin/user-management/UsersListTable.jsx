@@ -1,6 +1,24 @@
+import { banUser } from "../../../../services/api/admin/users/banUser";
 import Button from "../../../ui/Button";
+import toast from "react-hot-toast";
 
-export default function UsersListTable({ users }) {
+export default function UsersListTable({ users, refetch }) {
+  async function handleBanUser(userId) {
+    try {
+      const findUser = users.find((user) => userId === user.id);
+      await banUser(userId, { is_banned: !findUser.is_banned });
+      if (findUser.is_banned === true) {
+        toast.success("User ban lifted");
+      } else {
+        toast.success("User banned");
+      }
+      refetch();
+    } catch (error) {
+      toast.error(
+        "There was a problem banning this user. Please try again later"
+      );
+    }
+  }
   return (
     <table className="w-full divide-y divide-gray-300 border rounded-lg shadow-md">
       <thead className="rounded-xl">
@@ -37,22 +55,11 @@ export default function UsersListTable({ users }) {
           </th>
           <th
             scope="col"
-            className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-700 sm:pr-6"
+            className="py-3.5 truncate pl-4 pr-4 text-left text-sm font-semibold text-gray-700 sm:pr-6"
           >
             Ban Status
           </th>
-          <th
-            scope="col"
-            className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-700 sm:pr-6"
-          >
-            Date Added
-          </th>
-          <th
-            scope="col"
-            className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-700 sm:pr-6"
-          >
-            Date Updated
-          </th>
+
           <th
             scope="col"
             className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-700 sm:pr-6"
@@ -86,18 +93,30 @@ export default function UsersListTable({ users }) {
                 <span className="text-green-600 font-semibold">Permitted</span>
               )}
             </td>
-            <td className="p-4 text-sm text-gray-500 capitalize whitespace-nowrap">
-              {user.role_name.replace("_", " ").toLowerCase() || "N/A"}
-            </td>
-            <td className="p-4 text-sm text-gray-500 capitalize whitespace-nowrap">
-              {user.role_name.replace("_", " ").toLowerCase() || "N/A"}
-            </td>
-            <td className="p-4 text-sm text-gray-500 capitalize whitespace-nowrap">
+
+            <td className="p-4 space-x-2 text-sm text-gray-500 whitespace-nowrap">
+              {user.is_banned === true ? (
+                <Button
+                  onClick={() => handleBanUser(user.id)}
+                  variant="secondary"
+                  className="text-sm border-none shadow-none"
+                >
+                  Lift Ban
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => handleBanUser(user.id)}
+                  variant="secondary"
+                  className="text-sm border-none shadow-none"
+                >
+                  Ban
+                </Button>
+              )}
               <Button
                 variant="secondary"
                 className="text-sm border-none shadow-none"
               >
-                Ban
+                Edit
               </Button>
             </td>
           </tr>

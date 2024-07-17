@@ -25,8 +25,13 @@ export default function AdminLeftSideNavigations() {
     navigate("/");
   };
   return (
-    <div className="w-full h-full bg-white border-r border-gray-300">
-      <div className="divide-y divide-gray-200">
+    <div className="w-full h-full py-16 bg-white border-r border-gray-300">
+      <div className="divide-y divide-gray-200 space-y-10">
+        <div className="flex items-center justify-center">
+          <h2 className="font-semibold text-gray-800">
+            Office Meal Management
+          </h2>
+        </div>
         <div>
           {adminNavigationOptions?.map((option, index) => (
             <NavLink

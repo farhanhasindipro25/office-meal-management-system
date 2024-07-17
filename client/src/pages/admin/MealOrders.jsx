@@ -16,7 +16,9 @@ export default function MealOrders() {
       <div className="flex items-center justify-between">
         <h2 className="font-semibold text-gray-900 text-xl">Orders List</h2>
       </div>
-      <OrdersListTable orders={data?.data?.orders} />
+      <div className="overflow-x-auto">
+        <OrdersListTable orders={data?.data?.orders} />
+      </div>
     </div>
   );
 }

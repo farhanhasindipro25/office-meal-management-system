@@ -31,37 +31,29 @@ ORDER BY
 
 const getAllOrdersFromDB = `
 SELECT
-    users.id AS user_id,
-    users.user_name,
-    roles.name AS role_name,
     orders.id AS order_id,
-    orders.date,
+    orders.user_id,
+    users.user_name,
     orders.wants_meal,
+    orders.date,
     STRING_AGG(items.name, ', ') AS item_names
 FROM
-    users
-INNER JOIN
-    roles ON users.role_id = roles.id
+    orders
 LEFT JOIN
-    orders ON orders.user_id = users.id
+    users ON orders.user_id = users.id
 LEFT JOIN
-    weekly_schedules ON orders.meal_id = weekly_schedules.id
-LEFT JOIN
-    scheduled_meals ON weekly_schedules.id = scheduled_meals.schedule_id
+    scheduled_meals ON orders.meal_id = scheduled_meals.schedule_id
 LEFT JOIN
     items ON scheduled_meals.item_id = items.id
-WHERE
-    roles.name = 'GENERAL_USER'
 GROUP BY
-    users.id,
-    users.user_name,
-    roles.name,
     orders.id,
-    orders.date,
-    orders.wants_meal
-ORDER BY
+    orders.user_id,
     users.user_name,
-    orders.date;
+    orders.wants_meal,
+    orders.date
+ORDER BY
+    orders.date,
+    users.user_name;
 `;
 
 export const OrdersRepository = {

@@ -7,13 +7,7 @@ export default function OrdersListTable({ orders }) {
             scope="col"
             className="px-4 py-3.5 text-left text-sm font-semibold text-gray-700 truncate"
           >
-            User Name
-          </th>
-          <th
-            scope="col"
-            className="px-4 py-3.5 text-left text-sm font-semibold text-gray-700 truncate"
-          >
-            Role
+            Order ID
           </th>
           <th
             scope="col"
@@ -39,10 +33,7 @@ export default function OrdersListTable({ orders }) {
         {orders?.map((order) => (
           <tr key={order.order_id}>
             <td className="p-4 text-sm text-gray-500 whitespace-nowrap">
-              {order.user_name || "N/A"}
-            </td>
-            <td className="p-4 text-sm text-gray-500 whitespace-nowrap capitalize">
-              {order.role_name.replace("_", " ").toLowerCase() || "N/A"}
+              {order.order_id || "N/A"}
             </td>
             <td className="p-4 text-sm text-gray-500 whitespace-nowrap">
               {order.date || "N/A"}

@@ -34,7 +34,9 @@ export default function UserManagement() {
         refetch={refetch}
         setOpen={setOpenAddUserModal}
       />
-      <UsersListTable users={data?.data?.users} refetch={refetch} />
+      <div className="overflow-x-auto">
+        <UsersListTable users={data?.data?.users} refetch={refetch} />
+      </div>
     </div>
   );
 }

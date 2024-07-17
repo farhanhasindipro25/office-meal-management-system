@@ -1,7 +1,7 @@
-import { object, string } from "yup";
+import { boolean, object, string } from "yup";
 
 export const ADD_ORDER_SCHEMA = object({
-  wants_meal: string().required("Your choice is required"),
-  meal_id: string().required("Meal selection is required"),
+  wants_meal: boolean(),
+  meal_id: string(),
   date: string().required("Date is required"),
 });

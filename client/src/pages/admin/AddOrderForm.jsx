@@ -2,8 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useFormik } from "formik";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import { ADD_ORDER_INITIAL_VALUES } from "../../_libs/form-initial-values/addOrder";
-import { ADD_ORDER_SCHEMA } from "../../_libs/formik-schema/addOrderSchema";
 import { postOrder } from "../../_libs/services/api/employee/postOrder";
 import { getMealsList } from "../../_libs/services/api/admin/meals/getMealsList";
 import { generateMealOptions } from "../../_libs/utils/generateMealOptions";
@@ -19,8 +17,11 @@ import CheckBoxInputField from "../../_libs/components/ui/CheckBoxInputField";
 export default function AddOrderForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const formik = useFormik({
-    initialValues: ADD_ORDER_INITIAL_VALUES,
-    validationSchema: ADD_ORDER_SCHEMA,
+    initialValues: {
+      wants_meal: false,
+      meal_id: null,
+      date: "",
+    },
     onSubmit: async (values, { resetForm }) => {
       setIsSubmitting(true);
       try {
@@ -68,7 +69,7 @@ export default function AddOrderForm() {
           label="I want a meal"
         />
         <SelectField
-          label="Select Meal *"
+          label="Select Meal "
           name="meal_id"
           id="meal_id"
           placeholder="Select a meal..."
@@ -77,7 +78,7 @@ export default function AddOrderForm() {
           onBlur={formik.handleBlur}
           value={mealOptions.find((el) => el.label === formik.values.meal_id)}
         />
-        <FormikErrorBox formik={formik} field="meal_id" />
+
         <DateSelectorInputField
           label="Date*"
           id="date"

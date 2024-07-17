@@ -102,10 +102,10 @@ CREATE TABLE weekly_schedules (
 
 -- INSERT INTO weekly_schedules (working_day, current_month) VALUES (1, EXTRACT(MONTH FROM CURRENT_DATE)), (2, EXTRACT(MONTH FROM CURRENT_DATE)),(3, EXTRACT(MONTH FROM CURRENT_DATE)),(4, EXTRACT(MONTH FROM CURRENT_DATE)),(5, EXTRACT(MONTH FROM CURRENT_DATE));
 
-CREATE TABLE scheduled_meals (
+CREATE TABLE meals (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   schedule_id UUID NOT NULL REFERENCES weekly_schedules(id),
-  item_id UUID NOT NULL REFERENCES items(id)
+  item_id UUID [] NOT NULL REFERENCES items(id)
 );
 
 INSERT INTO scheduled_meals (schedule_id, item_id) VALUES ('259d803e-a2c4-48e0-a529-3bdd2bf62444', 'f5d2248e-e2c8-4c64-ab5f-254de3947745'),('259d803e-a2c4-48e0-a529-3bdd2bf62444', '348c3a1b-13c9-41cf-8913-2dc1d1f1f7ee'),('259d803e-a2c4-48e0-a529-3bdd2bf62444', '2f692da0-41b7-4422-b8fa-9b9440567c62');
@@ -195,3 +195,19 @@ GROUP BY
 ORDER BY
     users.user_name,
     orders.date;
+
+
+
+SELECT 
+    weekly_schedules.id AS schedule_id,
+    weekly_schedules.working_day,
+    weekly_schedules.current_month,
+    items.name AS item_name
+FROM 
+    weekly_schedules
+LEFT JOIN 
+    scheduled_meals ON weekly_schedules.id = scheduled_meals.schedule_id
+LEFT JOIN 
+    items ON scheduled_meals.item_id = items.id
+WHERE
+    weekly_schedules.id = 'your_schedule_id_here';

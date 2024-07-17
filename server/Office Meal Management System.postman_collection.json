@@ -1,0 +1,650 @@
+{
+	"info": {
+		"_postman_id": "447cb2f6-c190-4f51-a947-72c72e0b9607",
+		"name": "Office Meal Management System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25189026"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"admin@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/login",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/auth/refresh-token",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Roles",
+			"item": [
+				{
+					"name": "Add Role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMyZWQwZDMyLTA5MGYtNDQwZC05YmVlLTZmMzdjYjdhOGU3ZiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZV9pZCI6Ijk0MDVjMjcxLWRmZjktNGJkOS04ODI0LTE1MGE1ODJkYzU5ZiIsInJvbGVfbmFtZSI6IkFETUlOIiwicGhvbmUiOiI0MjMiLCJnZW5kZXIiOiJNQUxFIiwiZW1wbG95ZWVfaWQiOiJFMTIiLCJpc19iYW5uZWQiOmZhbHNlLCJpYXQiOjE3MjExMjExODUsImV4cCI6MTcyMTEyMTc4NX0.M71mHucXA55UrCY5XnlQnCfBZY-KyyKAVPjjDAx_nZo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"TEST\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/roles/create-role",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"roles",
+								"create-role"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Roles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMyZWQwZDMyLTA5MGYtNDQwZC05YmVlLTZmMzdjYjdhOGU3ZiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZV9pZCI6Ijk0MDVjMjcxLWRmZjktNGJkOS04ODI0LTE1MGE1ODJkYzU5ZiIsInJvbGVfbmFtZSI6IkFETUlOIiwicGhvbmUiOiI0MjMiLCJnZW5kZXIiOiJNQUxFIiwiZW1wbG95ZWVfaWQiOiJFMTIiLCJpc19iYW5uZWQiOmZhbHNlLCJpYXQiOjE3MjExMjExODUsImV4cCI6MTcyMTEyMTc4NX0.M71mHucXA55UrCY5XnlQnCfBZY-KyyKAVPjjDAx_nZo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/roles",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"roles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Add User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMyZWQwZDMyLTA5MGYtNDQwZC05YmVlLTZmMzdjYjdhOGU3ZiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZV9pZCI6Ijk0MDVjMjcxLWRmZjktNGJkOS04ODI0LTE1MGE1ODJkYzU5ZiIsInJvbGVfbmFtZSI6IkFETUlOIiwicGhvbmUiOiI0MjMiLCJnZW5kZXIiOiJNQUxFIiwiZW1wbG95ZWVfaWQiOiJFMTIiLCJpc19iYW5uZWQiOmZhbHNlLCJpYXQiOjE3MjEwMjc1NTMsImV4cCI6MTcyMTAyODE1M30.Fk256cy2M5DpATLKwvrIrLZuikfh_jg-TzyUTLQVwpc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_name\": \"General User 2\",\r\n    \"employee_id\": \"Test ID\",\r\n    \"email\": \"test.new@example.com\",\r\n    \"phone\": \"+8801345677899\",\r\n    \"gender\": \"Male\",\r\n    \"password\": \"password\",\r\n    \"role_id\": \"8e36330f-967c-4268-81e9-a86e65eca4e1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/create-user",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"create-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMyZWQwZDMyLTA5MGYtNDQwZC05YmVlLTZmMzdjYjdhOGU3ZiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZV9pZCI6Ijk0MDVjMjcxLWRmZjktNGJkOS04ODI0LTE1MGE1ODJkYzU5ZiIsInJvbGVfbmFtZSI6IkFETUlOIiwicGhvbmUiOiI0MjMiLCJnZW5kZXIiOiJNQUxFIiwiZW1wbG95ZWVfaWQiOiJFMTIiLCJpc19iYW5uZWQiOmZhbHNlLCJpYXQiOjE3MjEyNTQ5MDMsImV4cCI6MTcyMTI1ODUwM30.ppT6dlx6M-1-1ri_6KJ_rlkcPVOVaQRupxH2kVeUkcI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_name\": \"Edited Test User\",\r\n    \"employee_id\": \"Test ID\",\r\n    \"email\": \"test@example.com\",\r\n    \"phone\": \"+8801345677899\",\r\n    \"gender\": \"Male\",\r\n    \"password\": \"password\",\r\n    \"role_id\": \"8e36330f-967c-4268-81e9-a86e65eca4e1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/930a2b2d-f491-4d1f-af61-5fe0415212d3/edit",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"930a2b2d-f491-4d1f-af61-5fe0415212d3",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ban User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"is_banned\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users/930a2b2d-f491-4d1f-af61-5fe0415212d3/ban",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"930a2b2d-f491-4d1f-af61-5fe0415212d3",
+								"ban"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA0ODViMzE2LWYzNmYtNGQ0OC1iYzgwLTM0ZjI2N2IyOGEwOCIsImVtYWlsIjoiZmFyaGFuQGdtYWlsLmNvbSIsInJvbGVfaWQiOiI4ZTM2MzMwZi05NjdjLTQyNjgtODFlOS1hODZlNjVlY2E0ZTEiLCJyb2xlX25hbWUiOiJHRU5FUkFMX1VTRVIiLCJwaG9uZSI6Iis4ODAxMzQ1Njc3ODk5IiwiZ2VuZGVyIjoiTWFsZSIsImVtcGxveWVlX2lkIjoiRU0xIiwiaXNfYmFubmVkIjpmYWxzZSwiaWF0IjoxNzIxMDI4Mjc4LCJleHAiOjE3MjEwMjg4Nzh9.B6MzEn5XE4j67lNhhJEn9sq2fHH_wWw9yxRa-7hXInA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users/b8cda4f4-fc6e-4702-b905-e02fd4d6b18e",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"b8cda4f4-fc6e-4702-b905-e02fd4d6b18e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Add Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMyZWQwZDMyLTA5MGYtNDQwZC05YmVlLTZmMzdjYjdhOGU3ZiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZV9pZCI6Ijk0MDVjMjcxLWRmZjktNGJkOS04ODI0LTE1MGE1ODJkYzU5ZiIsInJvbGVfbmFtZSI6IkFETUlOIiwicGhvbmUiOiI0MjMiLCJnZW5kZXIiOiJNQUxFIiwiZW1wbG95ZWVfaWQiOiJFMTIiLCJpc19iYW5uZWQiOmZhbHNlLCJpYXQiOjE3MjExMTc4OTcsImV4cCI6MTcyMTExODQ5N30.G9U_dxJr1pYtexSc1hGCIMENdLQV_VgNTFUOpV8BTmE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"TEST\",\r\n    \"description\":\"TEST\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/categories/create-category",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"categories",
+								"create-category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Categories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMyZWQwZDMyLTA5MGYtNDQwZC05YmVlLTZmMzdjYjdhOGU3ZiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZV9pZCI6Ijk0MDVjMjcxLWRmZjktNGJkOS04ODI0LTE1MGE1ODJkYzU5ZiIsInJvbGVfbmFtZSI6IkFETUlOIiwicGhvbmUiOiI0MjMiLCJnZW5kZXIiOiJNQUxFIiwiZW1wbG95ZWVfaWQiOiJFMTIiLCJpc19iYW5uZWQiOmZhbHNlLCJpYXQiOjE3MjExMjA2NTgsImV4cCI6MTcyMTEyMTI1OH0.bnD78zl9OwNb7wdykJ7FVz92g1sIehSF-viNy9YqfyU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/categories",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Items",
+			"item": [
+				{
+					"name": "Add Item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMyZWQwZDMyLTA5MGYtNDQwZC05YmVlLTZmMzdjYjdhOGU3ZiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZV9pZCI6Ijk0MDVjMjcxLWRmZjktNGJkOS04ODI0LTE1MGE1ODJkYzU5ZiIsInJvbGVfbmFtZSI6IkFETUlOIiwicGhvbmUiOiI0MjMiLCJnZW5kZXIiOiJNQUxFIiwiZW1wbG95ZWVfaWQiOiJFMTIiLCJpc19iYW5uZWQiOmZhbHNlLCJpYXQiOjE3MjExMjA2NTgsImV4cCI6MTcyMTEyMTI1OH0.bnD78zl9OwNb7wdykJ7FVz92g1sIehSF-viNy9YqfyU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category_id\":\"932a4a90-4cfe-40f9-a52a-7f32dcae8ba3\",\r\n    \"name\":\"Polao\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/items/create-item",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"items",
+								"create-item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Items",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMyZWQwZDMyLTA5MGYtNDQwZC05YmVlLTZmMzdjYjdhOGU3ZiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZV9pZCI6Ijk0MDVjMjcxLWRmZjktNGJkOS04ODI0LTE1MGE1ODJkYzU5ZiIsInJvbGVfbmFtZSI6IkFETUlOIiwicGhvbmUiOiI0MjMiLCJnZW5kZXIiOiJNQUxFIiwiZW1wbG95ZWVfaWQiOiJFMTIiLCJpc19iYW5uZWQiOmZhbHNlLCJpYXQiOjE3MjExMjA2NTgsImV4cCI6MTcyMTEyMTI1OH0.bnD78zl9OwNb7wdykJ7FVz92g1sIehSF-viNy9YqfyU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/items",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Item",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Schedules",
+			"item": [
+				{
+					"name": "Add Schedule",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"working_day\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/schedules/create-schedule",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"schedules",
+								"create-schedule"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Schedules",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/schedules",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"schedules"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Meals",
+			"item": [
+				{
+					"name": "Add Meal",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMyZWQwZDMyLTA5MGYtNDQwZC05YmVlLTZmMzdjYjdhOGU3ZiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZV9pZCI6Ijk0MDVjMjcxLWRmZjktNGJkOS04ODI0LTE1MGE1ODJkYzU5ZiIsInJvbGVfbmFtZSI6IkFETUlOIiwicGhvbmUiOiI0MjMiLCJnZW5kZXIiOiJNQUxFIiwiZW1wbG95ZWVfaWQiOiJFMTIiLCJpc19iYW5uZWQiOmZhbHNlLCJpYXQiOjE3MjEyNDgwOTUsImV4cCI6MTcyMTI1MTY5NX0.hprxwyTUMDRdZgAYxoVZ9ZEyEgoUWZiU0Vaqcvgi2EE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"schedule_id\": \"006a4676-4819-4644-b030-e67f5caafe49\",\r\n    \"item_id\": \r\n        \"9575cdc2-36d7-4adc-991d-341caeab7cd0\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/meals/create-scheduled-meal",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"meals",
+								"create-scheduled-meal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Meals",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMyZWQwZDMyLTA5MGYtNDQwZC05YmVlLTZmMzdjYjdhOGU3ZiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZV9pZCI6Ijk0MDVjMjcxLWRmZjktNGJkOS04ODI0LTE1MGE1ODJkYzU5ZiIsInJvbGVfbmFtZSI6IkFETUlOIiwicGhvbmUiOiI0MjMiLCJnZW5kZXIiOiJNQUxFIiwiZW1wbG95ZWVfaWQiOiJFMTIiLCJpc19iYW5uZWQiOmZhbHNlLCJpYXQiOjE3MjEyNTM4MzksImV4cCI6MTcyMTI1NzQzOX0.r_UUOZH5p5LhXR8QSeEeepwnXu7fCFtiYQzbpNreSNE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/meals",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"meals"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Add Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA0ODViMzE2LWYzNmYtNGQ0OC1iYzgwLTM0ZjI2N2IyOGEwOCIsImVtYWlsIjoiZmFyaGFuQGdtYWlsLmNvbSIsInJvbGVfaWQiOiI4ZTM2MzMwZi05NjdjLTQyNjgtODFlOS1hODZlNjVlY2E0ZTEiLCJyb2xlX25hbWUiOiJHRU5FUkFMX1VTRVIiLCJwaG9uZSI6Iis4ODAxMzQ1Njc3ODk5IiwiZ2VuZGVyIjoiTWFsZSIsImVtcGxveWVlX2lkIjoiRU0xIiwiaXNfYmFubmVkIjpmYWxzZSwiaWF0IjoxNzIxMjUzODIxLCJleHAiOjE3MjEyNTc0MjF9.UHUopcp0ogJOSfFEfEmUM7rgl4gGxqfoI6OoD1cPEpg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"wants_meal\":\"TRUE\",\r\n    \"meal_id\":\"259d803e-a2c4-48e0-a529-3bdd2bf62444\",\r\n    \"date\":\"Monday\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/orders/create-order",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"orders",
+								"create-order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Orders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMyZWQwZDMyLTA5MGYtNDQwZC05YmVlLTZmMzdjYjdhOGU3ZiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZV9pZCI6Ijk0MDVjMjcxLWRmZjktNGJkOS04ODI0LTE1MGE1ODJkYzU5ZiIsInJvbGVfbmFtZSI6IkFETUlOIiwicGhvbmUiOiI0MjMiLCJnZW5kZXIiOiJNQUxFIiwiZW1wbG95ZWVfaWQiOiJFMTIiLCJpc19iYW5uZWQiOmZhbHNlLCJpYXQiOjE3MjEyNTQ5MDMsImV4cCI6MTcyMTI1ODUwM30.ppT6dlx6M-1-1ri_6KJ_rlkcPVOVaQRupxH2kVeUkcI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/orders/all",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"orders",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Orders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMyZWQwZDMyLTA5MGYtNDQwZC05YmVlLTZmMzdjYjdhOGU3ZiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZV9pZCI6Ijk0MDVjMjcxLWRmZjktNGJkOS04ODI0LTE1MGE1ODJkYzU5ZiIsInJvbGVfbmFtZSI6IkFETUlOIiwicGhvbmUiOiI0MjMiLCJnZW5kZXIiOiJNQUxFIiwiZW1wbG95ZWVfaWQiOiJFMTIiLCJpc19iYW5uZWQiOmZhbHNlLCJpYXQiOjE3MjEyNTM3OTksImV4cCI6MTcyMTI1NzM5OX0.ajXKHVx1UdDY_nLz11vYw0TIsZoAqDpORsCvn2OCSf4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/orders/0485b316-f36f-4d48-bc80-34f267b28a08",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"orders",
+								"0485b316-f36f-4d48-bc80-34f267b28a08"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:5000/api/v1"
+		}
+	]
+}

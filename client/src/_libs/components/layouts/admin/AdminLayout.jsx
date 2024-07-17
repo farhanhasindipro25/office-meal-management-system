@@ -22,10 +22,10 @@ export default function AdminLayout() {
   return (
     <div className="flex flex-col lg:flex-row w-full">
       <>
-        <div className="hidden w-1/5 lg:block">
+        <div className="hidden min-h-screen w-1/5 lg:block">
           <AdminLeftSideNavigations />
         </div>
-        <div className="block space-y-4 py-10 px-4 lg:hidden">
+        <div className="block space-y-4 py-6 px-4 lg:hidden">
           <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
             <div className="w-full flex justify-start gap-4 items-center">
               <UserIcon className="w-10 h-10 p-2 rounded-full bg-indigo-100 text-indigo-600" />

@@ -28,7 +28,7 @@ export default function AdminLeftSideNavigations() {
     navigate("/");
   };
   return (
-    <div className="w-full h-screen bg-white border-r border-gray-300">
+    <div className="w-full h-full bg-white border-r border-gray-300">
       <div className="divide-y divide-gray-200">
         <div className="p-4 w-full flex justify-start gap-4 items-center">
           <UserIcon className="w-10 h-10 p-2 rounded-full bg-indigo-100 text-indigo-600" />

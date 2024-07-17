@@ -15,7 +15,10 @@ ON
     items.category_id = categories.id;
 `;
 
+const deleteItemFromDB = "DELETE FROM items WHERE id = $1";
+
 export const ItemsRepository = {
   postItemToDB,
   getItemsFromDB,
+  deleteItemFromDB,
 };

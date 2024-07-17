@@ -17,4 +17,11 @@ router.get(
   ItemsController.getItems
 );
 
+router.delete(
+  "/:id",
+  authenticateUser,
+  authorizeUser("ADMIN"),
+  ItemsController.deleteItem
+);
+
 export const ItemRoutes = router;

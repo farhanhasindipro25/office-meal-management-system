@@ -1,5 +1,5 @@
-import { banUser } from "../../../../services/api/admin/users/banUser";
-import Button from "../../../ui/Button";
+import { banUser } from "../../../services/api/admin/users/banUser";
+import Button from "../../ui/Button";
 import toast from "react-hot-toast";
 
 export default function UsersListTable({ users, refetch }) {

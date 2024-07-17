@@ -42,7 +42,30 @@ const getItems = async (req, res) => {
   }
 };
 
+const deleteItem = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await ItemsServices.deleteItemFromDB(id);
+    res.status(201).json({
+      status: 201,
+      message: "Item deleted",
+      data: {
+        item: {
+          id: id,
+        },
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 500,
+      message: "Internal Server Error",
+      error: error,
+    });
+  }
+};
+
 export const ItemsController = {
   addItem,
   getItems,
+  deleteItem,
 };

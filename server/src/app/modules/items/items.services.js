@@ -14,7 +14,13 @@ const readItemsFromDB = async () => {
   return response;
 };
 
+const deleteItemFromDB = async (id) => {
+  const response = await pool.query(ItemsRepository.deleteItemFromDB, [id]);
+  return response;
+};
+
 export const ItemsServices = {
   addItemToDB,
   readItemsFromDB,
+  deleteItemFromDB,
 };

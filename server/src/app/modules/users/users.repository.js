@@ -32,7 +32,7 @@ AND
 AND 
     ($4::text IS NULL OR users.gender = $4)
 ORDER BY 
-    users.id
+    users.created_at DESC
 LIMIT 
     $5
 OFFSET 

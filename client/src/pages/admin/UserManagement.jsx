@@ -3,10 +3,10 @@ import Button from "../../_libs/components/ui/Button";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import AddUserModal from "./AddUserModal";
 import { useQuery } from "@tanstack/react-query";
-import UsersListTable from "../../_libs/components/pages/Admin/user-management/UsersListTable";
 import Loader from "../../_libs/components/ui/Loader";
 import ServerError from "../../_libs/components/ui/ServerError";
 import { getUsersList } from "../../_libs/services/api/admin/users/getUsersList";
+import UsersListTable from "../../_libs/components/pages/Admin/UsersListTable";
 
 export default function UserManagement() {
   const [openAddUserModal, setOpenAddUserModal] = useState(false);
